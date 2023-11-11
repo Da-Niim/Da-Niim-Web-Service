@@ -1,4 +1,4 @@
-import MainKoreaMapContainer from "@/component/main/organisms/MainKoreaMapContainer"
+import MainKoreaMapContainer from "@/components/main/organisms/MainKoreaMapContainer"
 import Image from "next/image"
 
 export default function Home() {
