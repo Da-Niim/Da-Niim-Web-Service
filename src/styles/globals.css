@@ -17,6 +17,9 @@
 }
 
 body {
+  svg {
+    fill: #f1f1f1;
+  }
   /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
