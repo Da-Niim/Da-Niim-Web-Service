@@ -1,6 +1,10 @@
+import MainKoreaMapContainer from "@/components/main/organisms/MainKoreaMapContainer"
 import Image from "next/image"
-import Loading from "./loading"
 
 export default function Home() {
-  return <Loading></Loading>
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <MainKoreaMapContainer />
+    </main>
+  )
 }
