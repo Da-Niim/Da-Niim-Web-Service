@@ -1,7 +1,7 @@
 "use client"
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/css"
-import { koreaAdministrativeDistrictData } from "../constant"
+import { KOREA_ADMINISTRATIVE_DISTRICT_DATA } from "../constant"
 import MainKoreaSvg from "../atoms/MainKoreaSvg"
 
 export default function MainKoreaAdministrativeDistrictSvg() {
@@ -10,7 +10,7 @@ export default function MainKoreaAdministrativeDistrictSvg() {
   }
   return (
     <MainKoreaSvg>
-      {koreaAdministrativeDistrictData.map((path, index) => {
+      {KOREA_ADMINISTRATIVE_DISTRICT_DATA.map((path, index) => {
         return (
           <path
             key={index}

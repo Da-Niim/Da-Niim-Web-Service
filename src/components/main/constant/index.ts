@@ -1,6 +1,6 @@
 import { SvgKoreaAdministrativeDistrictDataProps } from "../utils/interface"
 
-export const koreaAdministrativeDistrictData: SvgKoreaAdministrativeDistrictDataProps[] = [
+export const KOREA_ADMINISTRATIVE_DISTRICT_DATA: SvgKoreaAdministrativeDistrictDataProps[] = [
   {
     id: "busan",
     name: "부산",
