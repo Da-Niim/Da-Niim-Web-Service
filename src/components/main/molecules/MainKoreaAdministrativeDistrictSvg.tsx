@@ -14,13 +14,6 @@ export default function MainKoreaAdministrativeDistrictSvg() {
     setHoveredRegion(path.name)
   }
 
-  const handleMouseLeave = () => {
-    setHoveredRegion(null)
-  }
-  // const handleClick = (event: React.MouseEvent<SVGPathElement>) => {
-  //   console.log(`Clicked path: ${event.currentTarget.getAttribute("name")}`)
-  // }
-
   return (
     <>
       <MainKoreaSvg>
