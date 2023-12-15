@@ -14,6 +14,12 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+
+      colors: {
+        "input-bg-color": "#f9f9f9",
+        "submit-bg-color": "#d2b48c",
+        borderline: "#d2b48c",
+      },
     },
   },
   plugins: [],
