@@ -1,5 +1,6 @@
 import MainKoreaMapContainer from "@/components/main/organisms/MainKoreaMapContainer"
 import Image from "next/image"
+import Join from "@app/join/page"
 
 export default function Home() {
   return (
