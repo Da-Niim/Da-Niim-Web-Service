@@ -12,13 +12,15 @@
   },
   "dependencies": {
     "@emotion/css": "^11.11.2",
+    "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@nextui-org/react": "^2.2.9",
     "next": "13.5.6",
     "next-auth": "^4.24.5",
     "react": "^18",
+    "react-dom": "^18",
     "react-hook-form": "^7.49.2",
-    "react-dom": "^18"
+    "react-tooltip": "^5.25.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.5.1",
