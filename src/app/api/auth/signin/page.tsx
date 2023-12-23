@@ -14,10 +14,13 @@ export default async function SignInPage() {
     console.error("프로바이더 정보를 가져올 수 없습니다.")
     return null // 또는 다른 처리 방법을 선택할 수 있습니다.
   }
+
   console.log(providers)
+
   return (
     <section>
       <SocialSigninButton providers={providers} />
+      <h1>{`${providers}`}</h1>
     </section>
   )
 }
