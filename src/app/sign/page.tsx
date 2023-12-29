@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react"
 import { css } from "@emotion/react"
 import { Input, Autocomplete, AutocompleteSection, AutocompleteItem } from "@nextui-org/react"
 import { useForm, Control, Controller } from "react-hook-form"
+
 interface IForm {
   username: string
   userId: string
@@ -13,7 +14,7 @@ interface IForm {
   gender: ""
   birthDate: ""
 }
-const classNamestyle = {
+export const classNamestyle = {
   input: [
     "bg-input-bg-color",
     "text-black/90 dark:text-white/90",
@@ -40,7 +41,7 @@ const classNamestyle = {
   ],
 }
 
-const Join: React.FC = () => {
+const Sign: React.FC = () => {
   const yearRef = useRef<HTMLSelectElement>(null)
   const monthRef = useRef<HTMLSelectElement>(null)
   const dayRef = useRef<HTMLSelectElement>(null)
@@ -133,6 +134,7 @@ const Join: React.FC = () => {
         username,
         birthDate: createBirthDate(),
       }
+      console.log(formData)
       try {
         const response = await fetch("http://localhost:8080/user/register", {
           method: "POST",
@@ -145,10 +147,11 @@ const Join: React.FC = () => {
         if (response.ok) {
           // 데이터가 성공적으로 전송된 경우 처리할 내용
           console.log("데이터가 성공적으로 전송되었습니다.")
+          window.location.href = "/login" // 홈으로 이동하는 부분
         } else {
           // 서버에서 오류 응답을 받은 경우 처리할 내용
           const errorResponse = await response.json()
-          const errorMessage = errorResponse.detail.message.join(", ") // 배열 형식의 메시지를 문자열로 변환
+          const errorMessage = errorResponse.detail.message // 배열 형식의 메시지를 문자열로 변환
           console.error("서버 오류: ", errorMessage)
         }
       } catch (error) {
@@ -412,4 +415,4 @@ const Join: React.FC = () => {
     </form>
   )
 }
-export default Join
+export default Sign

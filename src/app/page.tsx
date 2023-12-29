@@ -1,4 +1,5 @@
 import MainKoreaMapContainer from "@/components/main/organisms/MainKoreaMapContainer"
+import Join from "@app/sign/page"
 import GlobalNavigationBar from "@components/navigationBar/templates/GlobalNavigationBar"
 
 export default function MainPage() {
