@@ -3,9 +3,47 @@
 @tailwind utilities;
 
 :root {
-  /* --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; */
+  @font-face {
+    font-family: NotoSansKR;
+    src: local(※), url("/public/assets/fonts/NotoSansKR-Bold.otf") format("opentype"), local(※),
+      url("/public/assets/fonts/NotoSansKR-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: NotoSansKR;
+    src: local(※), url("/public/assets/fonts/NotoSansKR-Medium.otf") format("opentype"), local(※),
+      url("/public/assets/fonts/NotoSansKR-Medium.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: NotoSansKR;
+    src: local(※), url("/public/assets/fonts/NotoSansKR-Medium.otf") format("opentype"), local(※),
+      url("/public/assets/fonts/NotoSansKR-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: NotoSansKR;
+    src: local(※), url("/public/assets/fonts/NotoSansKR-Regular.otf") format("opentype"), local(※),
+      url("/public/assets/fonts/NotoSansKR-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: NotoSansKR;
+    src: local(※), url("/public/assets/fonts/NotoSansKR-Regular.otf") format("opentype"), local(※),
+      url("/public/assets/fonts/NotoSansKR-Regular.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  font-family: "NotoSansKR", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
