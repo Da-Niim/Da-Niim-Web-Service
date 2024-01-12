@@ -1,6 +1,4 @@
 "use client"
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/css"
 import NavigationIconButton from "@components/navigationBar/molecules/NavigationIconButton"
 import { NavigationButtonType } from "@components/navigationBar/utils/type"
 
@@ -11,12 +9,7 @@ interface NavigationButtonContainerProps extends React.HTMLAttributes<HTMLDivEle
 
 export default function NavigationButtonContainer({ buttonList, gap, ...props }: NavigationButtonContainerProps) {
   return (
-    <div
-      className={css`
-        display: flex;
-        gap: ${gap};
-      `}
-    >
+    <div style={{ gap }} className={`flex`}>
       {buttonList.map((buttonType, idx) => {
         return <NavigationIconButton key={idx} buttonType={buttonType} />
       })}

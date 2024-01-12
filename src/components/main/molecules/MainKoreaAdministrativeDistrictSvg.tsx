@@ -32,6 +32,9 @@ export default function MainKoreaAdministrativeDistrictSvg() {
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
                     z-index: -1;
                   }
+                  &:focus {
+                    outline: none;
+                  }
                 `}
                 onMouseEnter={(e) => handleMouseEnter(e, path)}
               />

@@ -12,7 +12,6 @@ export default function NavigationIconButton({ buttonType, isSelected, ...props 
     <div className="flex flex-col items-center justify-center ">
       {props.children}
       <NavigationBarSvgComponent iconName={buttonType} />
-      {/* <NavigationSpanElement>{buttonType}</NavigationSpanElement> */}
     </div>
   )
 }

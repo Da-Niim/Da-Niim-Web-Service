@@ -20,9 +20,8 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-dom": "^18",
     "react-hook-form": "^7.49.2",
-    "react-router-dom": "^6.21.1"
+    "react-router-dom": "^6.21.1",
     "react-tooltip": "^5.25.0"
   },
   "devDependencies": {
