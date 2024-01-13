@@ -3,7 +3,7 @@ export type NavigationButtonType =
   | "Home"
   | "Profile"
   | "Search"
-  | "Settings"
+  | "Setting"
   | "Post"
   | "Ranking"
   | "Notification"

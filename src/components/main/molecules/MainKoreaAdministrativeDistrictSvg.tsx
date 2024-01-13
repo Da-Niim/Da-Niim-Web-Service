@@ -55,12 +55,12 @@ export default function MainKoreaAdministrativeDistrictSvg() {
               ? "5vh"
               : "0"
           }`,
-          border: "1px solid #2c2c2c",
         }}
         id="location-tooltip"
         place="top"
         variant="success"
         content={`${hoveredRegion}`}
+        border={"1px solid #2c2c2c"}
       />
     </>
   )

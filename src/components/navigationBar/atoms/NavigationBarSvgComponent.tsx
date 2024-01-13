@@ -1,12 +1,30 @@
 import Image from "next/image"
-import { NavigationButtonType } from "../utils/type"
 
 interface NavigationBarSvgComponentProps {
-  iconName: NavigationButtonType
+  iconName: string
 }
 
 const NavigationBarSvgComponent: React.FC<NavigationBarSvgComponentProps> = ({ iconName, ...props }) => {
-  return <Image {...props} src={`../../../assets/svgs/${iconName}.svg`} width={25} height={24} alt={iconName} />
+  return (
+    <div
+      className="flex items-center justify-center w-full h-auto
+    cursor-pointer"
+    >
+      <Image
+        {...props}
+        placeholder="empty"
+        priority={false}
+        src={`/assets/svgs/${iconName}.svg`}
+        width={24}
+        height={24}
+        style={{
+          maxWidth: "100%",
+          height: "auto",
+        }}
+        alt={iconName}
+      />
+    </div>
+  )
 }
 
 export default NavigationBarSvgComponent
