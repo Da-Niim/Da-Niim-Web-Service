@@ -2,8 +2,8 @@ import MainKoreaMapContainer from "@/components/main/organisms/MainKoreaMapConta
 
 export default function MainPage() {
   return (
-    <div className="flex flex-col min-h-screen w-full">
-      <div className="flex flex-col items-center justify-center p-20">
+    <div className=" flex flex-col min-h-screen w-full">
+      <div className="flex flex-col items-center justify-center p-24">
         <MainKoreaMapContainer />
       </div>
     </div>

@@ -1,4 +1,3 @@
-"use client"
 import NavigationIconButton from "@components/navigationBar/molecules/NavigationIconButton"
 import { NavigationBarItemProps } from "@components/navigationBar/utils/interface"
 import { NavigationButtonType } from "@components/navigationBar/utils/type"

@@ -15,10 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body className={inter.className}>
         <main>
-          <div>
-            <GlobalNavigationBar />
-            {children}
-          </div>
+          <GlobalNavigationBar />
+          {children}
         </main>
       </body>
     </html>
