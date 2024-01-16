@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "@styles/globals.css"
+import HeaderNavigationBar from "@components/navigationBar/templates/HeaderNavigationBar"
+import SideNavigationBar from "@components/navigationBar/templates/SideNavigationBar"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -12,7 +14,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main>
+          <div className="flex flex-col w-screen h-screen">
+            <HeaderNavigationBar />
+            <div className="flex w-full h-full">
+              <div className="hidden md:flex">
+                <SideNavigationBar />
+              </div>
+              {children}
+            </div>
+          </div>
+        </main>
+      </body>
     </html>
   )
 }
