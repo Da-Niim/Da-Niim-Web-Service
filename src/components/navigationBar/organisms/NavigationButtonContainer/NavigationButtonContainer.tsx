@@ -13,8 +13,8 @@ export default function NavigationButtonContainer({ buttonList, gap, ...props }:
     <div style={{ gap }} className={`w-fit flex align-center justify-center`}>
       {buttonList.map((iconButton, idx) => {
         return (
-          <Link key={idx} href={iconButton.navigationURL}>
-            <NavigationIconButton iconName={iconButton.title} />
+          <Link key={idx} href={iconButton.path}>
+            <NavigationIconButton path={iconButton.path} iconName={iconButton.icon} />
           </Link>
         )
       })}

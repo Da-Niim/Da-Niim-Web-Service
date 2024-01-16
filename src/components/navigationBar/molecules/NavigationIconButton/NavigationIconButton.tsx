@@ -2,14 +2,14 @@ import NavigationBarSvgComponent from "@components/navigationBar/atoms/Navigatio
 
 interface NavigationIconButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   iconName: string
-  isSelected?: boolean
+  path: string
 }
 
-export default function NavigationIconButton({ iconName, isSelected, ...props }: NavigationIconButtonProps) {
+export default function NavigationIconButton({ iconName, path, ...props }: NavigationIconButtonProps) {
   return (
     <div className="flex flex-col items-center justify-center">
       {props.children}
-      <NavigationBarSvgComponent iconName={iconName} />
+      <NavigationBarSvgComponent path={path} iconName={iconName} />
     </div>
   )
 }

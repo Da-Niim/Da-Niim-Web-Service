@@ -1,10 +1,14 @@
+"use client"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 interface NavigationBarSvgComponentProps {
   iconName: string
+  path: string
 }
 
-const NavigationBarSvgComponent: React.FC<NavigationBarSvgComponentProps> = ({ iconName, ...props }) => {
+const NavigationBarSvgComponent: React.FC<NavigationBarSvgComponentProps> = ({ iconName, path, ...props }) => {
+  const pathname = usePathname()
   return (
     <div
       className="flex items-center justify-center w-full h-auto
@@ -14,12 +18,13 @@ const NavigationBarSvgComponent: React.FC<NavigationBarSvgComponentProps> = ({ i
         {...props}
         placeholder="empty"
         priority={false}
-        src={`/assets/svgs/${iconName}.svg`}
+        src={`/assets/images/navigation/${iconName + (pathname === path ? "-selected" : "")}.png`}
         width={24}
         height={24}
         style={{
           maxWidth: "100%",
           height: "auto",
+          stroke: "blue",
         }}
         alt={iconName}
       />

@@ -2,59 +2,51 @@ import { NavigationBarItemProps } from "../utils/interface"
 import { NavigationButtonType } from "../utils/type"
 
 export const MAIN_NAVIGATION_BAR_LIST: NavigationBarItemProps<
-  Exclude<NavigationButtonType, "Notification" | "Search" | "Setting">
+  Exclude<NavigationButtonType, "notification" | "search" | "setting">
 >[] = [
   {
-    title: "Home",
-    icon: "Home",
-    selectedIcon: "HomeSelected",
-    navigationURL: "/",
+    title: "홈",
+    icon: "home",
+    path: "/",
   },
   {
     title: "Feed",
-    icon: "Feed",
-    selectedIcon: "FeedSelected",
-    navigationURL: "/feed",
+    icon: "feed",
+    path: "/feed",
   },
   {
     title: "Post",
-    icon: "Post",
-    selectedIcon: "PostSelected",
-    navigationURL: "/post",
+    icon: "post",
+    path: "/post",
   },
   {
     title: "Ranking",
-    icon: "Ranking",
-    selectedIcon: "RankingSelected",
-    navigationURL: "/ranking",
+    icon: "ranking",
+    path: "/ranking",
   },
   {
     title: "Profile",
-    icon: "Profile",
-    selectedIcon: "ProfileSelected",
-    navigationURL: "/profile",
+    icon: "profile",
+    path: "/profile",
   },
 ]
 
 export const SIDE_NAVIGATION_BAR_LIST: NavigationBarItemProps<
-  Extract<NavigationButtonType, "Notification" | "Search" | "Setting">
+  Extract<NavigationButtonType, "notification" | "search" | "setting">
 >[] = [
   {
     title: "Search",
-    icon: "Search",
-    selectedIcon: "SearchSelected",
-    navigationURL: "/",
+    icon: "search",
+    path: "/search",
   },
   {
     title: "Notification",
-    icon: "Notification",
-    selectedIcon: "NotificationSelected",
-    navigationURL: "/",
+    icon: "notification",
+    path: "",
   },
   {
     title: "Setting",
-    icon: "Setting",
-    selectedIcon: "SettingSelected",
-    navigationURL: "/",
+    icon: "setting",
+    path: "/setting",
   },
 ]
