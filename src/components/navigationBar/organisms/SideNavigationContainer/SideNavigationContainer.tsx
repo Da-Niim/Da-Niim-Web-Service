@@ -12,7 +12,7 @@ const SideNavigationContainer = ({ buttonList, ...props }: SideNavigationContain
     <div className={`w-full h-full flex flex-col align-start justify-start gap-[2rem] pt-[3.5rem]`}>
       {buttonList.map((iconButton, idx) => {
         return (
-          <Link key={idx} href={iconButton.path}>
+          <Link as={"button"} key={idx} href={iconButton.path}>
             <SideNavigationButton buttonItem={iconButton} />
           </Link>
         )

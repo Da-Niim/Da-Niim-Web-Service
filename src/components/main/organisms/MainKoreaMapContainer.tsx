@@ -2,7 +2,7 @@ import MainKoreaAdministrativeDistrictSvg from "../molecules/MainKoreaAdministra
 
 export default function MainKoreaMapContainer() {
   return (
-    <div className="w-[35vw] max-w-full h-auto">
+    <div className="w-[35rem] max-w-[80vw] h-auto">
       <MainKoreaAdministrativeDistrictSvg />
     </div>
   )

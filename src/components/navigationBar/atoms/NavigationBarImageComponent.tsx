@@ -2,16 +2,16 @@
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 
-interface NavigationBarSvgComponentProps {
+interface NavigationBarImageComponentProps {
   iconName: string
   path: string
 }
 
-const NavigationBarSvgComponent: React.FC<NavigationBarSvgComponentProps> = ({ iconName, path, ...props }) => {
+const NavigationBarImageComponent: React.FC<NavigationBarImageComponentProps> = ({ iconName, path, ...props }) => {
   const pathname = usePathname()
   return (
     <div
-      className="flex items-center justify-center w-fit h-auto
+      className="flex items-center justify-center w-[1.5rem]] h-auto
     cursor-pointer"
     >
       <Image
@@ -31,4 +31,4 @@ const NavigationBarSvgComponent: React.FC<NavigationBarSvgComponentProps> = ({ i
   )
 }
 
-export default NavigationBarSvgComponent
+export default NavigationBarImageComponent

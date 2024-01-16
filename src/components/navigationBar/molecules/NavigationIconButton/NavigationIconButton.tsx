@@ -1,4 +1,4 @@
-import NavigationBarSvgComponent from "@components/navigationBar/atoms/NavigationBarSvgComponent"
+import NavigationBarImageComponent from "@components/navigationBar/atoms/NavigationBarImageComponent"
 
 interface NavigationIconButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   iconName: string
@@ -9,7 +9,7 @@ export default function NavigationIconButton({ iconName, path, ...props }: Navig
   return (
     <div className="flex justify-start w-full items-center">
       {props.children}
-      <NavigationBarSvgComponent path={path} iconName={iconName} />
+      <NavigationBarImageComponent path={path} iconName={iconName} />
     </div>
   )
 }

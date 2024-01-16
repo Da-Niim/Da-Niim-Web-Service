@@ -19,7 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="flex flex-col w-screen h-screen">
             <HeaderNavigationBar />
             <div className="flex w-full h-full">
-              <SideNavigationBar />
+              <div className="hidden md:flex">
+                <SideNavigationBar />
+              </div>
               {children}
             </div>
           </div>
