@@ -1,7 +1,7 @@
 import { NavigationBarItemProps } from "../utils/interface"
 import { NavigationButtonType } from "../utils/type"
 
-export const MAIN_NAVIGATION_BAR_LIST: NavigationBarItemProps<
+export const SIDE_NAVIGATION_BAR_LIST: NavigationBarItemProps<
   Exclude<NavigationButtonType, "notification" | "search" | "setting">
 >[] = [
   {
@@ -31,14 +31,9 @@ export const MAIN_NAVIGATION_BAR_LIST: NavigationBarItemProps<
   },
 ]
 
-export const SIDE_NAVIGATION_BAR_LIST: NavigationBarItemProps<
-  Extract<NavigationButtonType, "notification" | "search" | "setting">
+export const HEADER_NAVIGATION_BAR_LIST: NavigationBarItemProps<
+  Extract<NavigationButtonType, "notification" | "setting">
 >[] = [
-  {
-    title: "Search",
-    icon: "search",
-    path: "/search",
-  },
   {
     title: "Notification",
     icon: "notification",

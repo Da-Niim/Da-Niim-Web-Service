@@ -11,7 +11,7 @@ const NavigationBarSvgComponent: React.FC<NavigationBarSvgComponentProps> = ({ i
   const pathname = usePathname()
   return (
     <div
-      className="flex items-center justify-center w-full h-auto
+      className="flex items-center justify-center w-fit h-auto
     cursor-pointer"
     >
       <Image
@@ -24,7 +24,6 @@ const NavigationBarSvgComponent: React.FC<NavigationBarSvgComponentProps> = ({ i
         style={{
           maxWidth: "100%",
           height: "auto",
-          stroke: "blue",
         }}
         alt={iconName}
       />

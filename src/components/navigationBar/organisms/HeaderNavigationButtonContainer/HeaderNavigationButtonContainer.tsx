@@ -5,18 +5,13 @@ import Link from "next/link"
 
 interface NavigationButtonContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   buttonList: NavigationBarItemProps<NavigationButtonType>[]
-  gap: string
 }
 
-export default function NavigationButtonContainer({ buttonList, gap, ...props }: NavigationButtonContainerProps) {
+export default function HeaderNavigationButtonContainer({ buttonList, ...props }: NavigationButtonContainerProps) {
   return (
-    <div style={{ gap }} className={`w-fit flex align-center justify-center`}>
+    <div className={`w-fit flex align-center justify-center gap-[1.4vw]`}>
       {buttonList.map((iconButton, idx) => {
-        return (
-          <Link key={idx} href={iconButton.path}>
-            <NavigationIconButton path={iconButton.path} iconName={iconButton.icon} />
-          </Link>
-        )
+        return <NavigationIconButton key={idx} path={iconButton.path} iconName={iconButton.icon} />
       })}
     </div>
   )

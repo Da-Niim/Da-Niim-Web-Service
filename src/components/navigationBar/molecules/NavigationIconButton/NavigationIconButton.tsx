@@ -7,7 +7,7 @@ interface NavigationIconButtonProps extends React.HTMLAttributes<HTMLDivElement>
 
 export default function NavigationIconButton({ iconName, path, ...props }: NavigationIconButtonProps) {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex justify-start w-full items-center">
       {props.children}
       <NavigationBarSvgComponent path={path} iconName={iconName} />
     </div>

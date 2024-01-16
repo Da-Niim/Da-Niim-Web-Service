@@ -6,7 +6,7 @@ const NavigationBarLogoComponent: React.FC = () => {
   return (
     <Link href="/">
       <div className="flex items-center justify-center w-full h-auto cursor-pointer">
-        <Image src="/assets/images/logo.png" width={120} height={40} alt="logo" />
+        <Image src="/assets/images/logo.png" width={100} height={20} alt="logo" />
       </div>
     </Link>
   )
