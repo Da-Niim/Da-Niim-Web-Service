@@ -21,7 +21,6 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-<<<<<<< HEAD
     "react-draggable": "^4.4.6",
     "react-hook-form": "^7.49.2",
     "react-icons": "^5.0.1",
@@ -30,11 +29,6 @@
     "react-swipeable": "^7.0.1",
     "react-tooltip": "^5.25.0",
     "slick-carousel": "^1.8.1"
-=======
-    "react-hook-form": "^7.49.2",
-    "react-router-dom": "^6.21.1",
-    "react-tooltip": "^5.25.0"
->>>>>>> 64cfaa0dd2701dbd5d6ee0c2230e9d5cd0ca5d7e
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.5.1",
