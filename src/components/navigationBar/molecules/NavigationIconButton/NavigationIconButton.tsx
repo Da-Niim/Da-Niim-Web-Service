@@ -1,18 +1,15 @@
-import NavigationBarSvgComponent from "@components/navigationBar/atoms/NavigationBarSvgComponent"
-import { NavigationSpanElement } from "@components/navigationBar/atoms/NavigationBarTextElement"
-import { NavigationButtonType } from "@components/navigationBar/utils/type"
+import NavigationBarImageComponent from "@components/navigationBar/atoms/NavigationBarImageComponent"
 
 interface NavigationIconButtonProps extends React.HTMLAttributes<HTMLDivElement> {
-  buttonType: NavigationButtonType
-  isSelected?: boolean
+  iconName: string
+  path: string
 }
 
-export default function NavigationIconButton({ buttonType, isSelected, ...props }: NavigationIconButtonProps) {
+export default function NavigationIconButton({ iconName, path, ...props }: NavigationIconButtonProps) {
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex justify-start w-full items-center">
       {props.children}
-      <NavigationBarSvgComponent iconName={buttonType} />
-      {/* <NavigationSpanElement>{buttonType}</NavigationSpanElement> */}
+      <NavigationBarImageComponent path={path} iconName={iconName} />
     </div>
   )
 }

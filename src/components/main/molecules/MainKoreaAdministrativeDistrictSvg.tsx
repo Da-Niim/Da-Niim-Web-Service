@@ -32,6 +32,9 @@ export default function MainKoreaAdministrativeDistrictSvg() {
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
                     z-index: -1;
                   }
+                  &:focus {
+                    outline: none;
+                  }
                 `}
                 onMouseEnter={(e) => handleMouseEnter(e, path)}
               />
@@ -52,12 +55,12 @@ export default function MainKoreaAdministrativeDistrictSvg() {
               ? "5vh"
               : "0"
           }`,
-          border: "1px solid #2c2c2c",
         }}
         id="location-tooltip"
         place="top"
         variant="success"
         content={`${hoveredRegion}`}
+        border={"1px solid #2c2c2c"}
       />
     </>
   )
