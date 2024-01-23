@@ -7,6 +7,7 @@ import { useForm, Control, Controller } from "react-hook-form"
 interface IForm {
   username: string
   userId: string
+  nickname: string
   password: string
   repassword: string
   email: string
@@ -99,19 +100,21 @@ const Sign: React.FC = () => {
     defaultValues: {
       username: "",
       userId: "",
+      nickname: "",
       password: "",
       repassword: "",
       email: "",
       phoneNumber: "",
     },
   })
-  const { username, userId, password, repassword, email, phoneNumber } = watch() // 각 필드의 값을 가져옵니다.
+  const { username, userId, password, repassword, email, phoneNumber, nickname } = watch() // 각 필드의 값을 가져옵니다.
 
   // 유효성 검사를 통과했고, 각 필드가 비어있지 않을 때 버튼을 활성화합니다.
   const isFormValid =
     Object.keys(errors).length === 0 &&
     username !== "" &&
     userId !== "" &&
+    nickname !== "" &&
     password !== "" &&
     repassword !== "" &&
     email !== "" &&
@@ -132,6 +135,7 @@ const Sign: React.FC = () => {
         phoneNumber,
         gender: selectedGender,
         username,
+        nickname,
         birthDate: createBirthDate(),
       }
       console.log(formData)
@@ -203,6 +207,34 @@ const Sign: React.FC = () => {
             )}
           />
           {errors.userId ? <p className="error">{errors.userId?.message}</p> : null}
+        </div>
+      </div>
+      <div className="flex flex-col my-5 w-80 h-20">
+        <label className="pl-2px pb-1">닉네임 </label>
+        <div className="flex flex-col  w-80 h-20">
+          <Controller
+            control={control}
+            name="nickname"
+            rules={{
+              maxLength: { value: 10, message: "최대 10글자 입력이 가능합니다." },
+              minLength: { value: 2, message: "2글자 이상 입력해주세요." },
+              // pattern: {
+              //   value: /^[A-Za-z0-9]+$/,
+              //   message: "영문과 숫자의 조합만 입력 가능합니다.",
+              // },
+            }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                radius="full"
+                isRequired
+                variant="bordered"
+                placeholder="Enter your Nick Name"
+                classNames={classNamestyle}
+              />
+            )}
+          />
+          {errors.nickname ? <p className="error">{errors.nickname?.message}</p> : null}
         </div>
       </div>
       <div className="flex flex-col my-5 w-80">

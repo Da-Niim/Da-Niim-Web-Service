@@ -16,7 +16,7 @@ function LoginPage() {
     const savedUsername = localStorage.getItem("savedUsername")
     if (savedUsername) {
       setUsername(savedUsername)
-      setRememberUsername(true) // 저장된 아이디가 있을 때, 아이디 저장 체크박스 체크 상태 변경
+      setRememberUsername(true)
     }
   }, [])
 
@@ -28,10 +28,9 @@ function LoginPage() {
     }
     const userId: string = (e.target as HTMLFormElement).username.value
     const password: string = (e.target as HTMLFormElement).password.value
-    const basicAuthHeader = `Basic ${btoa(`${userId}:${password}`)}` // 사용자 아이디와 비밀번호를 base64로 인코딩하여 생성
+    const basicAuthHeader = `Basic ${btoa(`${userId}:${password}`)}`
     try {
       const formData = { userId, password }
-      console.log(formData)
       const response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         headers: {
@@ -42,15 +41,12 @@ function LoginPage() {
       })
 
       if (response.ok) {
-        // 데이터가 성공적으로 전송된 경우 처리할 내용
         console.log("데이터가 성공적으로 전송되었습니다.")
-        // window.location.href = "/" // 홈으로 이동하는 부분
+        window.location.href = "/"
         const responseData = await response.json()
-        console.log("서버 응답 데이터:", responseData)
       } else {
-        // 서버에서 오류 응답을 받은 경우 처리할 내용
         const errorResponse = await response.json()
-        const errorMessage = errorResponse.detail.message // 배열 형식의 메시지를 문자열로 변환
+        const errorMessage = errorResponse.detail.message
         console.error("서버 오류: ", errorMessage)
       }
       if (rememberMe) {
