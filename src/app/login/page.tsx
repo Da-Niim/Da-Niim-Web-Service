@@ -2,7 +2,7 @@
 import { ClassNames } from "@emotion/react"
 import { signIn } from "next-auth/react"
 import { FormEvent, useState, useEffect } from "react"
-import { classNamestyle } from "@app/sign/page"
+import classNamestyle from "@app/sign/Styles/styles"
 import { Input } from "@nextui-org/react"
 import axios from "axios"
 
