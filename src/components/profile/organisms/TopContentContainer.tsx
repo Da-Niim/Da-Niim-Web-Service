@@ -25,7 +25,7 @@ const myContents = [
 
 const TopContentContainer = () => {
   return (
-    <div className="w-fit flex">
+    <div className="w-fit flex mx-auto md:mx-0">
       {/* <Image src={""} alt="image" width={140} height={140} /> */}
       <div className="w-36 h-36 rounded-full bg-slate-700"></div>
       <div className="ml-10 font-normal">
