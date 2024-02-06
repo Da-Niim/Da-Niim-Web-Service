@@ -1,25 +1,11 @@
 "use client"
 import React, { useState } from "react"
 import Image from "next/image"
-import {
-  ModalBox,
-  Modalcontainerstyle,
-  ModalContent,
-  ContentContainer,
-  Modaltitle,
-  UserProfile,
-  ProfileImage,
-  ProfileImageContainer,
-  UtilIconsstyle,
-  Buttonsubmit,
-  Locationholder,
-  Inputbox,
-} from "./styles"
-import dummyData from "../dummydata/MOCK_DATA.json"
-import addressicon from "../post/icons/address.png"
-import vectoricon from "../post/icons/vector.png"
-import imgposticon from "../post/icons/imgpost.png"
-import withicon from "../post/icons/with.png"
+import dummyData from "../dummydata/MOCK_DATA.js"
+import addressicon from "@assets/icons/address.png"
+import vectoricon from "@assets/icons/vector.png"
+import imgposticon from "@assets/icons/imgpost.png"
+import withicon from "@assets/icons/with.png"
 
 interface PostPageProps {
   clickModal: () => void
@@ -107,26 +93,31 @@ const PostPage: React.FC<PostPageProps> = ({ clickModal }) => {
   }
   const filteredData = dummyData.filter((data) => data.postId === 1)
   return (
-    <ModalBox>
-      <Modalcontainerstyle>
-        <ModalContent>
-          <Modaltitle>
+    <div className="fixed top-0 left-0 w-screen h-full bg-black bg-opacity-40 flex justify-center items-center">
+      <div className="flex items-center justify-center w-5/10 bg-white rounded-lg">
+        <div className="w-[600px] min-h-full min-w-full flex flex-col">
+          <div className="p-6 w-full flex justify-between border-b-2 border-gray-300">
             <div></div>
-            <input type="text" name="title" className="w-1/2 text-center" placeholder="제목을 입력해주세요"></input>
+            <input type="text" name="title" className="w-1/2 text-center" placeholder="제목을 입력해주세요" />
             <button onClick={handleXButtonClick}>X</button>
-          </Modaltitle>
+          </div>
           {filteredData.map((data) => (
-            <UserProfile key={data.postId}>
-              <ProfileImageContainer>
-                <ProfileImage src={data.userimg} alt="userimg" />
-              </ProfileImageContainer>
+            <div key={data.postId} className="p-3 border-b-2 border-gray-300 flex items-center">
+              <div className="p-1 overflow-hidden rounded-full border-2 border-black mr-4">
+                <img src={data.userimg} alt="userimg" className="w-full h-full object-cover" />
+              </div>
               <div className="mt-2 p-1">{data.username}</div>
-            </UserProfile>
+            </div>
           ))}
-          <UtilIconsstyle>
-            <Locationholder>{location ? <p>위치: {location}</p> : <p>위치 정보가 없습니다</p>}</Locationholder>
-            <Image src={vectoricon} alt="vector icon" />
-            <Image src={addressicon} alt="adress Icon" onClick={handleAddressIconClick} />
+          <div className="p-3 flex justify-end border-b-2 border-gray-300">
+            <div className="mr-auto">{location ? <p>위치: {location}</p> : <p>위치 정보가 없습니다</p>}</div>
+            <img src={vectoricon.src} alt="vector icon" className="m-1" />
+            <img
+              src={addressicon.src}
+              alt="adress Icon"
+              className="m-1 cursor-pointer"
+              onClick={handleAddressIconClick}
+            />
             <input
               type="file"
               id="imageInput"
@@ -135,32 +126,44 @@ const PostPage: React.FC<PostPageProps> = ({ clickModal }) => {
               onChange={handleImageInputChange}
               multiple
             />
-            <Image src={imgposticon} alt="Image Post Icon" onClick={handleImagePostIconClick} />
-            <Image src={withicon} alt="With Icon" />
-          </UtilIconsstyle>
-          <ContentContainer>
+            <img
+              src={imgposticon.src}
+              alt="Image Post Icon"
+              className="m-1 cursor-pointer"
+              onClick={handleImagePostIconClick}
+            />
+            <img src={withicon.src} alt="With Icon" className="m-1" />
+          </div>
+          <div className="p-3 flex justify-center items-center overflow-x-auto">
             <div className="flex flex-row items-center">
               {previewImages.map((image, index) => (
-                <img key={index} src={image} alt={`미리보기 ${index + 1}`} className={"w-[450px] h-[450px]  m-3"} />
+                <img key={index} src={image} alt={`미리보기 ${index + 1}`} className={"w-[450px] h-[450px] m-3"} />
               ))}
             </div>
-          </ContentContainer>
-          <Inputbox>
-            <input type="text" name="comment" className="w-full h-20" placeholder="내용을 입력해 주세요"></input>
-          </Inputbox>
-          <Inputbox>
-            <input type="text" name="tag" className="w-12 text-center" placeholder="태그"></input>
-          </Inputbox>
-          <Inputbox>
-            <input type="text" name="expenses" className="w-12 text-center" placeholder="경비"></input>
-          </Inputbox>
-          <Inputbox>
-            <input type="text" name="numOfPeople" className="w-12 text-center" placeholder="인원"></input>
-          </Inputbox>
-          <Buttonsubmit onClick={handlePostButtonClick}>게시</Buttonsubmit>
-        </ModalContent>
-      </Modalcontainerstyle>
-    </ModalBox>
+          </div>
+          <div className="p-3 border-t-2 border-gray-300">
+            <input type="text" name="comment" className="w-full h-20" placeholder="내용을 입력해 주세요" />
+          </div>
+          <div className="p-3 border-t-2 border-gray-300">
+            <input type="text" name="tag" className="w-12 text-center" placeholder="태그" />
+          </div>
+          <div className="p-3 border-t-2 border-gray-300">
+            <input type="text" name="expenses" className="w-12 text-center" placeholder="경비" />
+          </div>
+          <div className="p-3 border-t-2 border-gray-300">
+            <input type="text" name="numOfPeople" className="w-12 text-center" placeholder="인원" />
+          </div>
+          <div className="p-3">
+            <button
+              onClick={handlePostButtonClick}
+              className="w-full h-12 bg-yellow-500 text-white font-bold rounded-md"
+            >
+              게시
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

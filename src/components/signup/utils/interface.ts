@@ -24,7 +24,6 @@ export interface InputProps {
   errors: any
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   type?: string
-  // mask?: string
 }
 
 export interface GenderButtonProps {
@@ -37,9 +36,8 @@ export interface BirthDateSelectorProps {
   label?: string
   values: { label: string; value: string }[]
   onChange: (value: string) => void
-  // onChange: string
   ref?: React.RefObject<HTMLSelectElement>
   onDateChange?: {
-    onDateChange: (year: string, month: string, day: string) => void
+    onDateChange: () => void
   }
 }

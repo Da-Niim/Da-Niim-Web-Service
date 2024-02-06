@@ -2,15 +2,18 @@
 import { ClassNames } from "@emotion/react"
 import { signIn } from "next-auth/react"
 import { FormEvent, useState, useEffect } from "react"
-import classNamestyle from "@app/signUp/styles/styles"
+import classNamestyle from "@components/signup/styles/styles"
 import { Input } from "@nextui-org/react"
 import axios from "axios"
+import { useRouter } from "next/navigation"
 
 function LoginPage() {
   const [error, setError] = useState<string | null>(null)
   const [rememberUsername, setRememberUsername] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [username, setUsername] = useState("")
+
+  const router = useRouter()
 
   useEffect(() => {
     const savedUsername = localStorage.getItem("savedUsername")
@@ -42,7 +45,7 @@ function LoginPage() {
 
       if (response.ok) {
         console.log("데이터가 성공적으로 전송되었습니다.")
-        window.location.href = "/"
+        router.push("/")
         const responseData = await response.json()
       } else {
         const errorResponse = await response.json()

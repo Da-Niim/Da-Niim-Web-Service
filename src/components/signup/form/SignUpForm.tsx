@@ -1,18 +1,21 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { BirthDateComponent, GenderButton } from "@app/signup/component"
-import InputComponent from "@app/signup/component/Input"
-import { registerUser } from "@app/signup/api"
-import { SignFormProps } from "../Utils"
+import { BirthDateComponent, GenderButton } from "@components/signup"
+import InputComponent from "@components/signup/InputComponent"
+import { registerUser } from "@components/signup/api"
+import { SignFormProps } from "../utils"
 import { classNameStyle } from "../styles"
 
 const SignForm: React.FC = () => {
   const [selectedGender, setSelectedGender] = useState<"MALE" | "FEMALE" | null>(null)
-  const [selectedDate, setSelectedDate] = useState<string | null>("2024-01-01")
+  const [selectedDate, setSelectedDate] = useState<string | null>("")
 
   const handleGenderSelection = (gender: "MALE" | "FEMALE") => {
     setSelectedGender(gender)
+  }
+  const handleDateChange = (date: string | null) => {
+    setSelectedDate(date)
   }
 
   const {
@@ -22,15 +25,6 @@ const SignForm: React.FC = () => {
     watch,
   } = useForm<SignFormProps>({
     mode: "onBlur",
-    defaultValues: {
-      username: "",
-      userId: "",
-      nickname: "",
-      password: "",
-      repassword: "",
-      email: "",
-      phoneNumber: "",
-    },
   })
   const renderInputComponent = (
     labelname: string,
@@ -52,43 +46,43 @@ const SignForm: React.FC = () => {
   )
 
   const onSubmitForm = async (data: SignFormProps) => {
-    if (data.password === data.repassword) {
-      const formData = {
-        userId: data.userId,
-        email: data.email,
-        password: data.password,
-        phoneNumber: data.phoneNumber,
-        gender: selectedGender,
-        username: data.username,
-        nickname: data.nickname,
-        birthDate: selectedDate,
-      }
-      try {
-        await registerUser(formData)
-      } catch (error) {
-        console.error("회원가입 실패:", error)
-      }
-    } else {
-      console.log("비밀번호가 일치하지 않습니다.")
+    const formData = {
+      userId: data.userId,
+      email: data.email,
+      password: data.password,
+      phoneNumber: data.phoneNumber,
+      gender: selectedGender,
+      username: data.username,
+      nickname: data.nickname,
+      birthDate: selectedDate,
+    }
+    try {
+      await registerUser(formData)
+    } catch (error) {
+      console.error("회원가입 실패:", error)
     }
   }
 
-  const isPasswordMatch = watch("password") === watch("repassword")
-  const isFormValid =
-    Object.keys(errors).length === 0 &&
-    Object.values(watch()).every((value) => value !== "") &&
-    isPasswordMatch &&
-    selectedDate !== "" &&
-    (selectedGender === "MALE" || selectedGender === "FEMALE") &&
-    selectedGender !== null
-
   const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/
-  const passwordMessage = "영문(대소문자), 숫자, 특수 문자를 혼합하여 8자 이상 20자 이내로 입력해주세요."
+  const passwordMessage = `영문(대소문자), 숫자, 특수 문자를 혼합하여
+  8자 이상 20자 이내로 입력해주세요.`
   const emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
   const PhoneNumberPattern = /^010-\d{4}-\d{4}$/
 
+  const isFormValid =
+    Object.keys(errors).length === 0 &&
+    Object.values(watch()).every((value) => value !== "") &&
+    watch("password") === watch("repassword") &&
+    selectedDate !== "" &&
+    (selectedGender === "MALE" || selectedGender === "FEMALE") &&
+    selectedGender !== null &&
+    watch("email") !== "" &&
+    watch("phoneNumber") !== "" &&
+    watch("email")?.match(emailPattern) &&
+    watch("phoneNumber")?.match(PhoneNumberPattern)
+
   return (
-    <form className="flex flex-col items-center justify-center h-full w-full">
+    <form className="flex flex-col items-center justify-center h-full w-full" onSubmit={handleSubmit(onSubmitForm)}>
       {renderInputComponent("아이디", "userId", "ID", { maxLength: 10, minLength: 3 })}
       {renderInputComponent(
         "비밀번호",
@@ -120,7 +114,7 @@ const SignForm: React.FC = () => {
       )}
       {renderInputComponent("이름", "username", "Name", { maxLength: 10, minLength: 3 })}
       {renderInputComponent("닉네임", "nickname", "Nickname", { maxLength: 10, minLength: 2 })}
-      <BirthDateComponent selectedDate={selectedDate} />
+      <BirthDateComponent selectedDate={selectedDate} onDateChange={handleDateChange} />
       <div className="flex flex-col w-80">
         <label className="pl-2px pb-1">성별 </label>
         <div className="flex flex-row justify-between  w-80">
@@ -142,8 +136,6 @@ const SignForm: React.FC = () => {
         maxLength: { value: 13, message: "Maximum length is 13 characters." },
       })}
       <button
-        type="button"
-        onClick={handleSubmit(onSubmitForm)}
         className={`mt-8 bg-submit-bg-color text-white w-80 h-12 ${isFormValid ? "" : "cursor-not-allowed opacity-50"}`}
       >
         회원가입

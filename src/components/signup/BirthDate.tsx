@@ -1,11 +1,10 @@
 import React, { forwardRef } from "react"
-import { BirthDateSelectorProps } from "../Utils/interface"
+import { BirthDateSelectorProps } from "./utils/interface"
 
 const BirthDateSelector = forwardRef<HTMLSelectElement, BirthDateSelectorProps>(({ label, values, onChange }, ref) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value
     onChange(selectedValue)
-    console.log(selectedValue)
   }
 
   return (
