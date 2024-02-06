@@ -66,7 +66,7 @@ export const ProfileImageContainer = styled.div`
   padding: 4px;
   overflow: hidden;
   border-radius: 50%;
-  margin-right: 10px; /* 이미지와 텍스트 사이의 간격을 조절합니다. */
+  margin-right: 10px;
   border: 1px solid #111112;
   display: flex;
   justify-content: center;
@@ -76,7 +76,7 @@ export const ProfileImageContainer = styled.div`
 export const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지가 왜곡되지 않도록 설정합니다. */
+  object-fit: cover;
 `
 export const UtilIconsstyle = styled.div`
   display: flex;

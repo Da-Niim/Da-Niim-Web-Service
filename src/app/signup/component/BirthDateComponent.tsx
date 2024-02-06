@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react"
-import BirthDateSelector from "./BirthDate"
+import React, { useRef } from "react"
+import { BirthDateSelector } from "@app/signup/component"
 
-const BirthDateComponent: React.FC = () => {
+const BirthDateComponent: React.FC<{ selectedDate: string | null }> = ({ selectedDate }) => {
   const yearRef = useRef<HTMLSelectElement>(null)
   const monthRef = useRef<HTMLSelectElement>(null)
   const dayRef = useRef<HTMLSelectElement>(null)
-  const [selectedDate, setSelectedDate] = useState<string | null>("2002-11-11")
 
   const years = Array.from({ length: 104 }, (_, index) => {
     const year: number = new Date().getFullYear() - index
@@ -23,30 +22,15 @@ const BirthDateComponent: React.FC = () => {
   })
 
   const handleYearChange = () => {
-    const selectedYear = yearRef.current?.value || "2024"
-    const selectedMonth = monthRef.current?.value || "01"
-    const selectedDay = dayRef.current?.value || "01"
-
-    const newDate = `${selectedYear}-${selectedMonth}-${selectedDay}`
-    setSelectedDate(newDate)
+    console.log(selectedDate)
   }
 
   const handleMonthChange = () => {
-    const selectedYear = yearRef.current?.value || "2024"
-    const selectedMonth = monthRef.current?.value || "01"
-    const selectedDay = dayRef.current?.value || "01"
-
-    const newDate = `${selectedYear}-${selectedMonth}-${selectedDay}`
-    setSelectedDate(newDate)
+    console.log(selectedDate)
   }
 
   const handleDayChange = () => {
-    const selectedYear = yearRef.current?.value || "2024"
-    const selectedMonth = monthRef.current?.value || "01"
-    const selectedDay = dayRef.current?.value || "01"
-
-    const newDate = `${selectedYear}-${selectedMonth}-${selectedDay}`
-    setSelectedDate(newDate)
+    console.log(selectedDate)
   }
 
   return (
@@ -61,4 +45,5 @@ const BirthDateComponent: React.FC = () => {
   )
 }
 
+export { BirthDateComponent }
 export default BirthDateComponent

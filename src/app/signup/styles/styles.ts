@@ -1,4 +1,4 @@
-const classNamestyle = {
+const classNameStyle = {
   input: [
     "bg-input-bg-color",
     "text-black/90 dark:text-white/90",
@@ -15,7 +15,6 @@ const classNamestyle = {
   inputWrapper: [
     "bg-default-200/50",
     "dark:bg-default/60",
-    "backdrop-blur-xl",
     "backdrop-saturate-200",
     "hover:bg-default-200/70",
     "dark:hover:bg-default/70",
@@ -26,4 +25,4 @@ const classNamestyle = {
   ],
 }
 
-export default classNamestyle
+export default classNameStyle

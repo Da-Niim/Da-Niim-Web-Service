@@ -1,8 +1,7 @@
-// components/Sign/Inputs/Input.tsx
 import React from "react"
 import { Input } from "@nextui-org/react"
 import { Controller } from "react-hook-form"
-import { InputProps } from "../Utils/interface"
+import { InputProps } from "../Utils"
 
 const InputComponent: React.FC<InputProps> = ({
   control,
@@ -15,16 +14,19 @@ const InputComponent: React.FC<InputProps> = ({
   type,
 }) => {
   const phoneMask = (value: string) => {
-    const clearValue = value.replace(/[^0-9]/g, "")
-    const match = clearValue.match(/^(\d{0,3})(\d{0,4})(\d{0,4})$/)
+    if (name === "phoneNumber") {
+      const clearValue = value.replace(/[^0-9]/g, "")
+      const match = clearValue.match(/^(\d{0,3})(\d{0,4})(\d{0,4})$/)
 
-    if (match) {
-      const formattedValue = match
-        .slice(1)
-        .filter((group) => group !== "")
-        .join("-")
-      return formattedValue
+      if (match) {
+        const formattedValue = match
+          .slice(1)
+          .filter((group) => group !== "")
+          .join("-")
+        return formattedValue
+      }
     }
+
     return value
   }
 
@@ -39,19 +41,22 @@ const InputComponent: React.FC<InputProps> = ({
           render={({ field }) => (
             <>
               <Input
-                {...field}
-                value={field.value || ""}
+                value={field.value}
                 onChange={(e) => {
-                  let maskedValue = phoneMask(e.target.value)
-                  // 11자리까지만 입력되도록 설정
-                  if (maskedValue.length <= 13) {
-                    field.onChange(maskedValue)
+                  if (name === "phoneNumber") {
+                    const maskedValue = phoneMask(e.target.value)
+                    if (maskedValue.length <= 13) {
+                      field.onChange(maskedValue)
+                    }
+                  } else {
+                    // phoneNumber가 아닌 경우에는 mask 적용하지 않음
+                    field.onChange(e.target.value)
                   }
                 }}
+                placeholder={placeholder}
                 radius="full"
                 isRequired
                 variant="bordered"
-                placeholder={`${placeholder}`}
                 classNames={classNames}
                 type={type || "text"}
               />

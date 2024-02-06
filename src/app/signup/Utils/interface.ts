@@ -1,4 +1,4 @@
-export interface IForm {
+export interface SignFormProps {
   username: string
   userId: string
   nickname: string
@@ -11,6 +11,22 @@ export interface IForm {
   key?: string
 }
 
+export interface InputProps {
+  control: any
+  labelname: string
+  name: string
+  rules: any
+  placeholder: string
+  classNames: {
+    input: string[]
+    inputWrapper: string[]
+  }
+  errors: any
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  type?: string
+  // mask?: string
+}
+
 export interface GenderButtonProps {
   gender: "MALE" | "FEMALE"
   selectedGender: "MALE" | "FEMALE" | null
@@ -21,8 +37,9 @@ export interface BirthDateSelectorProps {
   label?: string
   values: { label: string; value: string }[]
   onChange: (value: string) => void
+  // onChange: string
   ref?: React.RefObject<HTMLSelectElement>
   onDateChange?: {
-    onDateChange: (year: string, month: string, day: string) => void // 상위 컴포넌트로 선택된 날짜를 전달하는 콜백 함수
+    onDateChange: (year: string, month: string, day: string) => void
   }
 }

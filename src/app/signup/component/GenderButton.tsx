@@ -1,4 +1,4 @@
-import { GenderButtonProps } from "./interface"
+import { GenderButtonProps } from "../Utils"
 
 const GenderButton: React.FC<GenderButtonProps> = ({ gender, selectedGender, handleGenderSelection }) => {
   return (
@@ -14,5 +14,5 @@ const GenderButton: React.FC<GenderButtonProps> = ({ gender, selectedGender, han
     </button>
   )
 }
-
+export { default as GenderButton } from "./GenderButton"
 export default GenderButton

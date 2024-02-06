@@ -23,4 +23,4 @@ const registerUser = async (formData: any) => {
   }
 }
 
-export { registerUser }
+export default registerUser

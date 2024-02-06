@@ -1,16 +1,7 @@
+"use client"
 import React, { useState } from "react"
 import Image from "next/image"
-import * as Styles from "./styles/styles"
-import dummyData from "../feed/dummydata/MOCK_DATA.json"
-import addressicon from "../post/icons/address.png"
-import vectoricon from "../post/icons/vector.png"
-import imgposticon from "../post/icons/imgpost.png"
-import withicon from "../post/icons/with.png"
-
-interface PostPageProps {
-  clickModal: () => void
-}
-const {
+import {
   ModalBox,
   Modalcontainerstyle,
   ModalContent,
@@ -23,7 +14,16 @@ const {
   Buttonsubmit,
   Locationholder,
   Inputbox,
-} = Styles
+} from "./styles"
+import dummyData from "../dummydata/MOCK_DATA.json"
+import addressicon from "../post/icons/address.png"
+import vectoricon from "../post/icons/vector.png"
+import imgposticon from "../post/icons/imgpost.png"
+import withicon from "../post/icons/with.png"
+
+interface PostPageProps {
+  clickModal: () => void
+}
 
 const PostPage: React.FC<PostPageProps> = ({ clickModal }) => {
   const handleXButtonClick = (e: React.MouseEvent) => {
@@ -43,11 +43,7 @@ const PostPage: React.FC<PostPageProps> = ({ clickModal }) => {
     const files = e.target.files
     if (files) {
       const newImages = Array.from(files)
-
-      // 이전 이미지들과 새로 선택된 이미지를 합쳐서 상태를 업데이트
       setSelectedImages((prevImages) => [...prevImages, ...newImages])
-
-      // 미리보기 이미지 업데이트
       const newPreviewImages = newImages.map((image) => URL.createObjectURL(image))
       setPreviewImages((prevImages) => [...prevImages, ...newPreviewImages])
     }
@@ -77,7 +73,6 @@ const PostPage: React.FC<PostPageProps> = ({ clickModal }) => {
   }
 
   const handlePostButtonClick = () => {
-    // Prepare the data for the POST request
     const formData = {
       title,
       comment,
@@ -110,9 +105,7 @@ const PostPage: React.FC<PostPageProps> = ({ clickModal }) => {
         console.error("Error during POST request:", error)
       })
   }
-
   const filteredData = dummyData.filter((data) => data.postId === 1)
-
   return (
     <ModalBox>
       <Modalcontainerstyle>
