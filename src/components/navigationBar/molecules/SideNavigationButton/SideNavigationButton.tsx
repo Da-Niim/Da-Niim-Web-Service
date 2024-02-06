@@ -10,7 +10,7 @@ interface SideNavigationButtonProps extends React.HTMLAttributes<HTMLDivElement>
 
 const SideNavigationButton = ({ buttonItem, ...props }: SideNavigationButtonProps) => {
   return (
-    <div className="flex items-center justify-start px-[4rem]">
+    <div className="w-full flex items-center justify-start">
       <NavigationBarImageComponent path={buttonItem.path} iconName={buttonItem.icon} />
       <NavigationSpanElement>{buttonItem.title}</NavigationSpanElement>
     </div>

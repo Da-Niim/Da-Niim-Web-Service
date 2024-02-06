@@ -1,8 +1,8 @@
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "@styles/globals.css"
 import HeaderNavigationBar from "@components/navigationBar/templates/HeaderNavigationBar"
 import SideNavigationBar from "@components/navigationBar/templates/SideNavigationBar"
+import "@styles/globals.css"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="hidden md:flex">
                 <SideNavigationBar />
               </div>
-              {children}
+              <div className="container mx-auto max-w-screen">{children}</div>
             </div>
           </div>
         </main>
