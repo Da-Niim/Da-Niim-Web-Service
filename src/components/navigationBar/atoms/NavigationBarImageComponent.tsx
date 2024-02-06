@@ -11,7 +11,7 @@ const NavigationBarImageComponent: React.FC<NavigationBarImageComponentProps> = 
   const pathname = usePathname()
   return (
     <div
-      className="flex items-center justify-center w-[1.5rem]] h-auto
+      className="flex items-center justify-center w-6 h-auto
     cursor-pointer"
     >
       <Image

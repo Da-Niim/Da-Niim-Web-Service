@@ -4,7 +4,7 @@ import React from "react"
 
 const NavigationBarLogoComponent: React.FC = () => {
   return (
-    <Link href="/" as={"image"}>
+    <Link href="/">
       <div className="flex items-center justify-center w-full h-auto cursor-pointer">
         <Image
           src="/assets/images/logo.png"

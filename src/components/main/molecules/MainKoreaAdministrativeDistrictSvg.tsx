@@ -1,10 +1,10 @@
 "use client"
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/css"
-import { KOREA_ADMINISTRATIVE_DISTRICT_DATA } from "../constant"
-import MainKoreaSvg from "../atoms/MainKoreaSvg"
 import { useState } from "react"
 import { Tooltip as ReactTooltip } from "react-tooltip"
+import MainKoreaSvg from "../atoms/MainKoreaSvg"
+import { KOREA_ADMINISTRATIVE_DISTRICT_DATA } from "../constant"
 import { SvgKoreaAdministrativeDistrictNameType } from "../utils/types"
 
 export default function MainKoreaAdministrativeDistrictSvg() {
@@ -28,7 +28,7 @@ export default function MainKoreaAdministrativeDistrictSvg() {
                 name={path.name}
                 className={css`
                   &:hover {
-                    fill: #d2b48c;
+                    fill: #7cbc27;
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
                     z-index: -1;
                   }
@@ -58,7 +58,7 @@ export default function MainKoreaAdministrativeDistrictSvg() {
         }}
         id="location-tooltip"
         place="top"
-        variant="success"
+        variant="light"
         content={`${hoveredRegion}`}
         border={"1px solid #2c2c2c"}
       />

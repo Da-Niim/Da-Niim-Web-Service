@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "react"],
+  "plugins": ["@typescript-eslint", "react", "prettier", "plugin:tailwindcss/recommended"],
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",
@@ -15,6 +15,12 @@
     }
   },
   "rules": {
+    "tailwindcss/classnames-order": ["warn", { "callees": ["cva", "ctm"] }],
+    "tailwindcss/enforces-negative-arbitrary-values": ["warn", { "callees": ["cva", "ctm"] }],
+    "tailwindcss/enforces-shorthand": ["warn", { "callees": ["cva", "ctm"] }],
+    "tailwindcss/no-contradicting-classname": ["warn", { "callees": ["cva", "ctm"] }],
+    "tailwindcss/no-custom-classname": ["warn", { "callees": ["cva", "ctm"] }],
+
     "import/extensions": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
