@@ -28,7 +28,7 @@ export default function MainKoreaAdministrativeDistrictSvg() {
                 name={path.name}
                 className={css`
                   &:hover {
-                    fill: #7cbc27;
+                    fill: ${path.color};
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
                     z-index: -1;
                   }
@@ -48,12 +48,12 @@ export default function MainKoreaAdministrativeDistrictSvg() {
             hoveredRegion === "경상북도" || hoveredRegion === "강원도" || hoveredRegion === "경기도"
               ? "10vh"
               : hoveredRegion === "전라북도" ||
-                hoveredRegion === "전라남도" ||
-                hoveredRegion === "경상남도" ||
-                hoveredRegion === "충청남도" ||
-                hoveredRegion === "충청북도"
-              ? "5vh"
-              : "0"
+                  hoveredRegion === "전라남도" ||
+                  hoveredRegion === "경상남도" ||
+                  hoveredRegion === "충청남도" ||
+                  hoveredRegion === "충청북도"
+                ? "5vh"
+                : "0"
           }`,
         }}
         id="location-tooltip"
