@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react"
 import Image from "next/image"
-import dummyData from "../dummydata/MOCK_DATA.js"
+import dummyData from "../dummydata/dummydata.js/index.js"
 import addressicon from "@assets/icons/address.png"
 import vectoricon from "@assets/icons/vector.png"
 import imgposticon from "@assets/icons/imgpost.png"
