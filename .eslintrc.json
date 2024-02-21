@@ -1,7 +1,8 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "prettier", "plugin:tailwindcss/recommended"],
+  "plugins": ["react", "@typescript-eslint", "prettier", "plugin:tailwindcss/recommended"],
+
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",

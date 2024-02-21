@@ -1,6 +1,6 @@
 "use client"
-import { useState } from "react"
 import dynamic from "next/dynamic"
+import { useState } from "react"
 
 const ModalComponent = dynamic(() => import("../feed/post/page"), { ssr: false })
 
@@ -16,7 +16,7 @@ export default function Home() {
           </li>
         </ul>
       </nav>
-      {showModal && <ModalComponent clickModal={clickModal} />}
+      {showModal && <ModalComponent />}
     </div>
   )
 }
