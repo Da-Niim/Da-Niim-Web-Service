@@ -4,7 +4,7 @@ export default function MainKoreaSvg({ ...props }: React.SVGAttributes<HTMLOrSVG
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 524 631"
       aria-label="Map of South Korea"
-      className="fill-[#f1f1f1] stroke-[#2c2c2c] w-auto"
+      className="fill-[#CDCCCC] stroke-[#FDFDFD] w-auto"
       {...props}
     >
       {props.children}

@@ -1,10 +1,10 @@
 "use client"
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/css"
-import { KOREA_ADMINISTRATIVE_DISTRICT_DATA } from "../constant"
-import MainKoreaSvg from "../atoms/MainKoreaSvg"
 import { useState } from "react"
 import { Tooltip as ReactTooltip } from "react-tooltip"
+import MainKoreaSvg from "../atoms/MainKoreaSvg"
+import { KOREA_ADMINISTRATIVE_DISTRICT_DATA } from "../constant"
 import { SvgKoreaAdministrativeDistrictNameType } from "../utils/types"
 
 export default function MainKoreaAdministrativeDistrictSvg() {
@@ -28,7 +28,7 @@ export default function MainKoreaAdministrativeDistrictSvg() {
                 name={path.name}
                 className={css`
                   &:hover {
-                    fill: #d2b48c;
+                    fill: ${path.color};
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
                     z-index: -1;
                   }
@@ -48,17 +48,17 @@ export default function MainKoreaAdministrativeDistrictSvg() {
             hoveredRegion === "경상북도" || hoveredRegion === "강원도" || hoveredRegion === "경기도"
               ? "10vh"
               : hoveredRegion === "전라북도" ||
-                hoveredRegion === "전라남도" ||
-                hoveredRegion === "경상남도" ||
-                hoveredRegion === "충청남도" ||
-                hoveredRegion === "충청북도"
-              ? "5vh"
-              : "0"
+                  hoveredRegion === "전라남도" ||
+                  hoveredRegion === "경상남도" ||
+                  hoveredRegion === "충청남도" ||
+                  hoveredRegion === "충청북도"
+                ? "5vh"
+                : "0"
           }`,
         }}
         id="location-tooltip"
         place="top"
-        variant="success"
+        variant="light"
         content={`${hoveredRegion}`}
         border={"1px solid #2c2c2c"}
       />
