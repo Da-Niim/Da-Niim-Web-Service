@@ -3,7 +3,7 @@ export interface SignFormProps {
   userId: string
   nickname: string
   password: string
-  repassword: string
+  rePassword: string
   email: string
   phoneNumber: string
   gender: "MALE" | "FEMALE"
@@ -13,7 +13,7 @@ export interface SignFormProps {
 
 export interface InputProps {
   control: any
-  labelname: string
+  labelName: string
   name: string
   rules: any
   placeholder: string

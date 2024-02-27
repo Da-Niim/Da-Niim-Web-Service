@@ -1,4 +1,4 @@
-import React from "react"
+import { ctm } from "@utils/styles"
 
 function SubTab({
   activeSubTab,
@@ -14,11 +14,10 @@ function SubTab({
       {tabNames.map((subTab) => (
         <div
           key={subTab}
-          className={`flex justify-center w-28 subtab ${
-            activeSubTab === subTab
-              ? "text-[#f7f8fa] font-bold bg-[#dc9435] rounded-lg"
-              : "text-gray-400 bg-[#f2f3f6] rounded-lg"
-          }`}
+          className={ctm(
+            `flex justify-center w-28 rounded-lg`,
+            activeSubTab === subTab ? "text-[#f7f8fa] font-bold bg-[#dc9435] " : "text-gray-400 bg-[#f2f3f6] ",
+          )}
           onClick={() => handleSubTabClick(subTab)}
         >
           {subTab}

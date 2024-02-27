@@ -6,7 +6,6 @@ const page = () => {
     <div className=" mx-auto">
       <div className="mx-auto lg:px-56 mt-20 w-full flex flex-col">
         <TopContentContainer />
-
         <BottomContentContainer />
       </div>
     </div>

@@ -1,4 +1,3 @@
-import dummyData from "./utils/dummydata/dummydata"
 import { FeedListProps } from "./utils"
 
 function TravelList({ initialData }: FeedListProps) {

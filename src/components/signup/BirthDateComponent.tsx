@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from "react"
-import { BirthDateSelector } from "@components/signup"
+import React, { useEffect, useRef } from "react"
+import BirthDateSelector from "./BirthDate"
 
 const BirthDateComponent: React.FC<{ selectedDate: string | null; onDateChange: (date: string | null) => void }> = ({
   selectedDate,
@@ -62,5 +62,4 @@ const BirthDateComponent: React.FC<{ selectedDate: string | null; onDateChange: 
   )
 }
 
-export { BirthDateComponent }
 export default BirthDateComponent

@@ -1,25 +1,18 @@
-export default async function fetchData(url: string, subTab: string, accessToken: string) {
-  try {
-    const baseUrl = "http://localhost:8080"
-    const endpoint = "/feeds" // 여기 수정해야됨
-    const fetchUrl = `${baseUrl}${endpoint}?subTab=${subTab}`
+import { axiosInstance } from "@utils/axios"
 
-    const response = await fetch(fetchUrl, {
+export default async function fetchData(subTab: string) {
+  try {
+    const response = await axiosInstance.get(`/feeds?subTab=${subTab}`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        // Authorization: `Bearer ${}`,
       },
     })
 
-    const data = await response.json()
-    if (data === null) {
-      console.log(null)
-    }
-    console.log(data)
+    const { data } = response
 
     return data
   } catch (error) {
-    console.error("Error fetching data:", error)
     return null
   }
 }

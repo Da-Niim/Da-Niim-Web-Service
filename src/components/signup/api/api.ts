@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:8080"
-
+//TODO: axiosInstance + any제거
 const registerUser = async (formData: any) => {
   try {
     const response = await fetch(`${API_URL}/user/register`, {
