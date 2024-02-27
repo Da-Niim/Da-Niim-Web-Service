@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic"
 import { useState } from "react"
 
-const ModalComponent = dynamic(() => import("../feed/post/page"), { ssr: false })
+const ModalComponent = dynamic(() => import("../../components/feed/post/page"), { ssr: false })
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false)
@@ -16,7 +16,7 @@ export default function Home() {
           </li>
         </ul>
       </nav>
-      {showModal && <ModalComponent />}
+      {showModal && <ModalComponent clickModal={clickModal} />}
     </div>
   )
 }

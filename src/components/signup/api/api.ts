@@ -12,7 +12,7 @@ const registerUser = async (formData: any) => {
 
     if (response.ok) {
       console.log("데이터가 성공적으로 전송되었습니다.")
-      // window.location.href = "/login"
+      window.location.href = "/login"
     } else {
       const errorResponse = await response.json()
       const errorMessage = errorResponse.detail.message
