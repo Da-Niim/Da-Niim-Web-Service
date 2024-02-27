@@ -1,17 +1,15 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"))
 
+    // Push custom SVG handling rules
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
       {
         ...fileLoaderRule,
         test: /\.svg$/i,
         resourceQuery: /url/, // *.svg?url
       },
-      // Convert all other *.svg imports to React components
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
@@ -20,11 +18,14 @@ const nextConfig = {
       },
     )
 
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
+    // Exclude *.svg from the existing file loader rule
     fileLoaderRule.exclude = /\.svg$/i
 
     return config
   },
+  output: "export",
+  trailingSlash: true,
+  reactStrictMode: true,
 }
 
 module.exports = nextConfig

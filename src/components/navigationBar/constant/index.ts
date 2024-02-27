@@ -5,7 +5,7 @@ export const SIDE_NAVIGATION_BAR_LIST: NavigationBarItemProps<
   Exclude<NavigationButtonType, "notification" | "search" | "setting">
 >[] = [
   {
-    title: "홈",
+    title: "Home",
     icon: "home",
     path: "/",
   },

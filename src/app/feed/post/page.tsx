@@ -1,20 +1,19 @@
 "use client"
-import React, { useState } from "react"
-import Image from "next/image"
-import dummyData from "../dummydata/dummydata.js/index.js"
 import addressicon from "@assets/icons/address.png"
-import vectoricon from "@assets/icons/vector.png"
 import imgposticon from "@assets/icons/imgpost.png"
+import vectoricon from "@assets/icons/vector.png"
 import withicon from "@assets/icons/with.png"
+import React, { useState } from "react"
+import dummyData from "../dummydata"
 
 interface PostPageProps {
   clickModal: () => void
 }
 
-const PostPage: React.FC<PostPageProps> = ({ clickModal }) => {
+const PostPage: React.FC = () => {
   const handleXButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation()
-    clickModal()
+    // clickModal()
   }
 
   const [title, setTitle] = useState<string>("")

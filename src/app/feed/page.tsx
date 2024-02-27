@@ -1,4 +1,4 @@
-import dummyData from "./dummydata/dummydata.js/index.js"
+import dummyData from "./dummydata"
 
 function FeedPage() {
   return (
