@@ -3,6 +3,7 @@ import SideNavigationBar from "@components/navigationBar/templates/SideNavigatio
 import "@styles/globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Providers from "./providers"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="hidden md:flex">
                 <SideNavigationBar />
               </div>
-              <div className="flex-1">{children}</div>
+              <Providers>
+              <div className="flex flex-1">{children}</div>
+              </Providers>
             </div>
           </div>
         </main>

@@ -1,6 +1,6 @@
 "use client"
-import { fetchData } from "@/components/feed/api"
-import FeedList from "@components/feed/feedlist"
+import { fetchData } from "@utils/api"
+import FeedList from "@components/feed/FeedList"
 
 import SubTab from "@components/feed/SubTab"
 import Tab from "@components/feed/Tab"

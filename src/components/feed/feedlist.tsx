@@ -1,4 +1,4 @@
-import { FeedListProps } from "./utils"
+import { FeedListProps } from "../../utils/interface/FeedListProps"
 
 function FeedList({ initialData }: FeedListProps) {
   // function FeedList() {

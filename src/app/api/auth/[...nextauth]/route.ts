@@ -1,42 +1,44 @@
 import NextAuth, { NextAuthOptions } from "next-auth"
 import NaverProvider from "next-auth/providers/naver"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { Basic } from "next/font/google"
 
-export const authOptions: NextAuthOptions = {
+const handler = NextAuth({
   providers: [
-    NaverProvider({
-      clientId: process.env.NAVER_CLIENT_ID || "",
-      clientSecret: process.env.NAVER_CLIENT_SECRET || "",
-    }),
     CredentialsProvider({
-      id: "Da-Niim",
       name: "Da-Niim",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        username: {
+          label: "이메일",
+          type: "text",
+          placeholder: "이메일 주소 입력 요망",
+        },
+        password: { label: "비밀번호", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch("/localhost:8080/user/register", {
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/auth/login`, {
           method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: credentials?.username,
+            password: credentials?.password,
+          }),
         })
         const user = await res.json()
-
-        // If no error and we have user data, return it
-        if (res.ok && user) {
+        console.log(user)
+        if (user) {
           return user
+        } else {
+          return null
         }
-        // Return null if user data could not be retrieved
-        return null
       },
     }),
   ],
-  pages: {
-    signIn: "/auth/signin", // 내가 원하는 커스텀 sign-in 페이지의 url
-  },
-}
-
-const handler = NextAuth(authOptions)
+  // pages: {
+  //   signIn: "/login",
+  // },
+})
 
 export { handler as GET, handler as POST }

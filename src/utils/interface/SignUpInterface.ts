@@ -17,7 +17,7 @@ export interface InputProps {
   name: string
   rules: any
   placeholder: string
-  classNames: {
+  classNames?: {
     input: string[]
     inputWrapper: string[]
   }

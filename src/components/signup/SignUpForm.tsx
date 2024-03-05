@@ -1,14 +1,11 @@
 "use client"
-
-import InputComponent from "@components/signUp/InputComponent"
-import { registerUser } from "@components/signUp/api"
+import InputComponent from "@common/button/InputComponent"
+import { registerUser } from "@utils/api"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-
-import BirthDateComponent from "../BirthDateComponent"
-import GenderButton from "../GenderButton"
-import { classNameStyle } from "../styles"
-import { SignFormProps } from "../utils"
+import BirthDateComponent from "./BirthDateComponent"
+import GenderButton from "../../common/button/GenderButton"
+import { SignFormProps } from "@utils/interface"
 
 const SignForm: React.FC = () => {
   // TODO: Enum 사용
@@ -41,11 +38,10 @@ const SignForm: React.FC = () => {
   ) => (
     <InputComponent
       control={control}
-      labelname={labelName}
+      labelName={labelName}
       name={name}
       rules={rules}
       placeholder={`Enter your ${label}`}
-      classNames={classNameStyle}
       errors={errors}
       type={type}
     />

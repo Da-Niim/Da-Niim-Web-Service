@@ -47,8 +47,8 @@ const Loading: React.FC = () => {
 
   return (
     <div css={loadingContainerStyles}>
-      <img src="/direct-flight 3.png" alt="air" css={airImageStyles} className="airImage" />
-      <img src="/direct-flight 2.png" alt="point" css={pointStyles} className="pointImage" />
+      <img src="/assets/images/loadingImage_1.png" alt="air" css={airImageStyles} className="airImage" />
+      <img src="/assets/images/loadingImage_2.png" alt="point" css={pointStyles} className="pointImage" />
 
       <style>{flyAirAnimation}</style>
     </div>
