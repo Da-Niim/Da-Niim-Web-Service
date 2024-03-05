@@ -1,7 +1,7 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth"
 import NaverProvider from "next-auth/providers/naver"
+import KakaoProvider from "next-auth/providers/kakao"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { Basic } from "next/font/google"
 
 const handler = NextAuth({
   providers: [
@@ -35,10 +35,29 @@ const handler = NextAuth({
         }
       },
     }),
+    NaverProvider({
+      clientId: process.env.NAVER_CLIENT_ID!,
+      clientSecret: process.env.NAVER_CLIENT_SECRET!,
+    }),
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+    }),
   ],
-  // pages: {
-  //   signIn: "/login",
-  // },
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user }
+    },
+
+    async session({ session, token }) {
+      session.user = token as any
+      return session
+    },
+  },
+
+  pages: {
+    signIn: "/login",
+  },
 })
 
 export { handler as GET, handler as POST }

@@ -2,7 +2,8 @@
 import { Input } from "@nextui-org/react"
 import { axiosInstance } from "@utils/axios"
 import { useRouter } from "next/navigation"
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent, useEffect, useState,useRef } from "react"
+import { signIn,getProviders } from "next-auth/react"
 
 // const classNameStyle = {
 //   input: [
@@ -40,6 +41,18 @@ function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false)
   const [username, setUsername] = useState("")
 
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const [providers, setProviders] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const res: any = await getProviders();
+      console.log(res);
+      setProviders(res);
+    })();
+  }, []);
+
   const router = useRouter()
   // TODO: Custom Hooks로 빼기
   useEffect(() => {
@@ -51,44 +64,49 @@ function LoginPage() {
   }, [])
 
 
-  // const handleSubmit = async () => {
-
-  //   const result = await signIn("credentials", {
-  //     username: emailRef.current,
-  //     password: passwordRef.current,
-  //     redirect: true,
-  //     callbackUrl: "/",
-  //   });
-  // }
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    const username: string = (e.target as HTMLFormElement).username.value
-    const password: string = (e.target as HTMLFormElement).password.value
-
-
-    try {
-      const response = await axiosInstance.post("/auth/login",{}, {
-        auth: {
-          username,
-          password,
-        },
-      })
-      console.log(response.data)
-      if (response.data) {
-        //TODO: Storage 저장
-        if (rememberUsername) {
-          localStorage.setItem("savedUsername", username)
-        }
-        router.push("/")
-      }
-    } catch (error) {
-      // TODO : Modal창이나 다른 에러처리 필요
-      setError("아이디 또는 비밀번호가 올바르지 않습니다.")
-      console.error("로그인 실패:", error)
-    }
+  const handleSubmit = async () => {
+    const result = await signIn("credentials", {
+      username: emailRef.current,
+      password: passwordRef.current,
+      redirect: true,
+      callbackUrl: "/",
+    });
   }
+  const handleKakao = async () => {
+    const result = await signIn("kakao", {
+      redirect: true,
+      callbackUrl: "/",
+    });
+  };
+
+  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault()
+
+  //   const username: string = (e.target as HTMLFormElement).username.value
+  //   const password: string = (e.target as HTMLFormElement).password.value
+
+
+  //   try {
+  //     const response = await axiosInstance.post("/auth/login",{}, {
+  //       auth: {
+  //         username,
+  //         password,
+  //       },
+  //     })
+  //     console.log(response.data)
+  //     if (response.data) {
+  //       //TODO: Storage 저장
+  //       if (rememberUsername) {
+  //         localStorage.setItem("savedUsername", username)
+  //       }
+  //       router.push("/")
+  //     }
+  //   } catch (error) {
+  //     // TODO : Modal창이나 다른 에러처리 필요
+  //     setError("아이디 또는 비밀번호가 올바르지 않습니다.")
+  //     console.error("로그인 실패:", error)
+  //   }
+  // }
 
   const handleRememberUsername = () => {
     // TODO:  체크 해제시에만 제거
@@ -96,20 +114,35 @@ function LoginPage() {
   }
   // TODO: ClassName => Tailwind css
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen">
       <div className="flex flex-col  justify-center h-full">
         <label className="pl-2px pb-1">Da-Niim 에 로그인 </label>
         <div className="flex flex-col my-5 w-80">
-          <div className="flex flex-col w-80">
-            <Input type="text" name="username" placeholder="Enter your ID" />
+          <div className="flex flex-col w-80"><input
+              ref={emailRef}
+              onChange={(e: any) => {
+                emailRef.current = e.target.value;
+              }}
+              id="email"
+              name="email"
+              type="email"
+              required
+              autoFocus={true}
+            />
           </div>
         </div>
         <div className="flex flex-col my-5 w-80">
           <div className="flex flex-col  w-80">
-            <Input type="password" name="password" placeholder="Enter your Password" />
+          <input
+              type="password"
+              id="password"
+              name="password"
+              ref={passwordRef}
+              onChange={(e: any) => (passwordRef.current = e.target.value)}
+            />
           </div>
         </div>
-        <button type="submit" className="bg-submit-bg-color text-white w-80 h-12 my-5">
+        <button onClick={handleSubmit} className="bg-submit-bg-color text-white w-80 h-12 my-5">
           로그인
         </button>
         <div className="flex flex-row w-80">
@@ -132,7 +165,21 @@ function LoginPage() {
           </div>
         </div>
       </div>
-    </form>
+      <div>
+        <button
+          className="w-full transform rounded-md bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
+          onClick={() => signIn("kakao", { redirect: false, callbackUrl: "/" })}
+        >
+          kakao login
+        </button>
+      </div>
+      <button
+          className="w-full transform rounded-md bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
+          onClick={() => signIn("naver", { redirect: true, callbackUrl: "/" })}
+        >
+          naver login
+        </button>
+    </div>
   )
 }
 
