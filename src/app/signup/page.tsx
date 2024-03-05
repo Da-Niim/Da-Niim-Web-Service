@@ -2,7 +2,7 @@ import SignForm from "@components/signUp/SignUpForm"
 
 const SignUp: React.FC = () => {
   return (
-    <div className="flex justify-center w-screen h-screen absolute">
+    <div className="flex m-auto items-center justify-center">
       <SignForm />
     </div>
   )

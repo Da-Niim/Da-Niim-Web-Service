@@ -17,17 +17,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body className={inter.className}>
         <main>
-          <div className="flex flex-col w-screen h-screen">
-            <HeaderNavigationBar />
-            <div className="flex flex-1">
-              <div className="hidden md:flex">
-                <SideNavigationBar />
+          <Providers>
+            <div className="flex flex-col w-screen h-screen">
+              <HeaderNavigationBar />
+              <div className="flex flex-1">
+                <div className="hidden md:flex">
+                  <SideNavigationBar />
+                </div>
+                <div className="flex flex-1 flex-col">{children}</div>
               </div>
-              <Providers>
-              <div className="flex flex-1">{children}</div>
-              </Providers>
             </div>
-          </div>
+          </Providers>
         </main>
       </body>
     </html>

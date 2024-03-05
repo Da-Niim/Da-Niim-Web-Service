@@ -64,7 +64,7 @@ const SignForm: React.FC = () => {
   const PhoneNumberPattern = /^010-\d{4}-\d{4}$/
 
   return (
-    <form className="flex flex-col items-center justify-center h-full w-fit" onSubmit={handleSubmit(onSubmitForm)}>
+    <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmitForm)}>
       {renderInputComponent("아이디", "userId", "ID", { maxLength: 10, minLength: 3 })}
       {renderInputComponent(
         "비밀번호",
