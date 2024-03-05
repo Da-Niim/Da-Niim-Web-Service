@@ -1,11 +1,13 @@
 "use client"
-import InputComponent from "@common/button/InputComponent"
+import InputComponent from "@components/common/button/InputComponent"
+
+import Button from "@components/common/button/Button"
 import { registerUser } from "@utils/api"
+import { SignFormProps } from "@utils/interface"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
+import GenderButton from "../common/button/GenderButton"
 import BirthDateComponent from "./BirthDateComponent"
-import GenderButton from "../../common/button/GenderButton"
-import { SignFormProps } from "@utils/interface"
 
 const SignForm: React.FC = () => {
   // TODO: Enum 사용
@@ -62,7 +64,7 @@ const SignForm: React.FC = () => {
   const PhoneNumberPattern = /^010-\d{4}-\d{4}$/
 
   return (
-    <form className="flex flex-col items-center justify-center h-full w-full" onSubmit={handleSubmit(onSubmitForm)}>
+    <form className="flex flex-col items-center justify-center h-full w-fit" onSubmit={handleSubmit(onSubmitForm)}>
       {renderInputComponent("아이디", "userId", "ID", { maxLength: 10, minLength: 3 })}
       {renderInputComponent(
         "비밀번호",
@@ -116,7 +118,7 @@ const SignForm: React.FC = () => {
         },
         maxLength: { value: 13, message: "Maximum length is 13 characters." },
       })}
-      <button className={`mt-8 bg-submit-bg-color text-white w-80 h-12`}>회원가입</button>
+      <Button className={`mt-8 w-full `}>회원가입</Button>
     </form>
   )
 }

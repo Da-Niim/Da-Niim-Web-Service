@@ -28,7 +28,7 @@ const config: Config = {
         highlight: "#D2B48C",
         "text-color": "#121212",
         "text-subdued": "#A7A7A7",
-
+        white: "#F2F2F2",
         "input-bg-color": "#f9f9f9",
         "submit-bg-color": "#d2b48c",
       },
