@@ -1,7 +1,8 @@
+import { axiosInstance } from "@utils/axios"
 import NextAuth from "next-auth"
-import NaverProvider from "next-auth/providers/naver"
-import KakaoProvider from "next-auth/providers/kakao"
 import CredentialsProvider from "next-auth/providers/credentials"
+import KakaoProvider from "next-auth/providers/kakao"
+import NaverProvider from "next-auth/providers/naver"
 
 const handler = NextAuth({
   providers: [
@@ -16,22 +17,33 @@ const handler = NextAuth({
         password: { label: "비밀번호", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch(`http://52.79.175.72:8080/auth/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Basic ${btoa(credentials?.username + ":" + credentials?.password)}`,
+        if (!credentials) {
+          return null
+        }
+
+        const { data } = await axiosInstance.post(
+          "/auth/login",
+          {},
+          {
+            auth: {
+              username: credentials?.username,
+              password: credentials?.password,
+            },
           },
-          body: JSON.stringify({
-            username: credentials?.username,
-            password: credentials?.password,
-          }),
-        })
-        const user = await res.json()
+        )
+
+        // const res = await fetch(`http://52.79.175.72:8080/auth/login`, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     authorization: `Basic ${btoa(credentials?.username + ":" + credentials?.password)}`,
+        //   },
+        // })
+        // const user = await res.json()
 
         // console.log(user)
-        if (user) {
-          return user
+        if (data) {
+          return data
         } else {
           return null
         }

@@ -1,14 +1,13 @@
 "use client"
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/css"
-import { useState } from "react"
+import { ctm } from "@utils/styles"
+import * as React from "react"
 import { Tooltip as ReactTooltip } from "react-tooltip"
 import MainKoreaSvg from "../atoms/MainKoreaSvg"
 import { KOREA_ADMINISTRATIVE_DISTRICT_DATA } from "../constant"
 import { SvgKoreaAdministrativeDistrictNameType } from "../utils/types"
 
-export default function MainKoreaAdministrativeDistrictSvg() {
-  const [hoveredRegion, setHoveredRegion] = useState<SvgKoreaAdministrativeDistrictNameType | null>(null)
+export default function MainKoreaAdministrativeDistrictSvg({}: {}) {
+  const [hoveredRegion, setHoveredRegion] = React.useState<SvgKoreaAdministrativeDistrictNameType | null>(null)
 
   const handleMouseEnter = (event: any, path: any) => {
     setHoveredRegion(path.name)
@@ -26,16 +25,8 @@ export default function MainKoreaAdministrativeDistrictSvg() {
                 d={path.pathData}
                 id={path.id}
                 name={path.name}
-                className={css`
-                  &:hover {
-                    fill: ${path.color};
-                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-                    z-index: -1;
-                  }
-                  &:focus {
-                    outline: none;
-                  }
-                `}
+                className={ctm(`hover:shadow-lg hover:z-1 focus:outline-none `)}
+                style={{ fill: hoveredRegion == path.name ? path.color : "" }}
                 onMouseEnter={(e) => handleMouseEnter(e, path)}
               />
             </g>

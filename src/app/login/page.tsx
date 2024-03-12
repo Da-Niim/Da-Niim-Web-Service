@@ -1,10 +1,8 @@
 "use client"
-import { Input } from "@nextui-org/react"
-import { axiosInstance } from "@utils/axios"
+import Button from "@components/common/Button"
+import { getProviders, signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import { FormEvent, useEffect, useState, useRef, useContext } from "react"
-import { useSession, signIn, getProviders } from "next-auth/react"
-import { getToken } from "next-auth/jwt"
+import { useEffect, useRef, useState } from "react"
 // const classNameStyle = {
 //   input: [
 //     "bg-input-bg-color",
@@ -110,9 +108,7 @@ function LoginPage() {
             />
           </div>
         </div>
-        <button onClick={handleSubmit} className="bg-submit-bg-color text-white w-80 h-12 my-5">
-          로그인
-        </button>
+        <Button onClick={handleSubmit}>로그인</Button>
         <div className="flex flex-row w-80">
           <div className="flex flex-row my-5 w-80">
             <input

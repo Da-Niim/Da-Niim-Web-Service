@@ -1,13 +1,14 @@
 "use client"
-import InputComponent from "@components/common/button/InputComponent"
 
-import Button from "@components/common/button/Button"
-import Input from "@components/common/button/Input"
 import { registerUser } from "@utils/api"
 import { SignFormProps } from "@utils/interface"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import GenderButton from "../common/button/GenderButton"
+
+import Button from "@components/common/Button"
+import GenderButton from "@components/common/GenderButton"
+import Input from "@components/common/Input"
+import InputComponent from "@components/common/InputComponent"
 import BirthDateComponent from "./BirthDateComponent"
 
 const SignForm: React.FC = () => {

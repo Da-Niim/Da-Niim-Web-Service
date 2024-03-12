@@ -32,12 +32,17 @@ export const SIDE_NAVIGATION_BAR_LIST: NavigationBarItemProps<
 ]
 
 export const HEADER_NAVIGATION_BAR_LIST: NavigationBarItemProps<
-  Extract<NavigationButtonType, "notification" | "setting">
+  Extract<NavigationButtonType, "notification" | "setting" | "profile">
 >[] = [
   {
     title: "Notification",
     icon: "notification",
     path: "",
+  },
+  {
+    title: "Profile",
+    icon: "profile",
+    path: "/profile",
   },
   {
     title: "Setting",
