@@ -1,11 +1,11 @@
 import React from "react"
 import { Input } from "@nextui-org/react"
 import { Controller } from "react-hook-form"
-import { InputProps } from "./utils"
+import { InputProps } from "@utils/interface"
 
 const InputComponent: React.FC<InputProps> = ({
   control,
-  labelname,
+  labelName,
   name,
   rules,
   placeholder,
@@ -31,7 +31,7 @@ const InputComponent: React.FC<InputProps> = ({
 
   return (
     <div className={classNames?.inputWrapper.join(" ")}>
-      <label className="pl-2px">{labelname} </label>
+      <label className="pl-2px">{labelName} </label>
       <div className="flex flex-col w-80">
         <Controller
           control={control}

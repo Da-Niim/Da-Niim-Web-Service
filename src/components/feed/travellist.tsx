@@ -1,5 +1,4 @@
-import dummyData from "./utils/dummydata/dummydata"
-import { FeedListProps } from "./utils"
+import { FeedListProps } from "../../utils/interface/FeedListProps"
 
 function TravelList({ initialData }: FeedListProps) {
   // function FeedList() {

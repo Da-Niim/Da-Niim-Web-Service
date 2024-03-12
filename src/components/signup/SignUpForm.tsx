@@ -1,13 +1,18 @@
 "use client"
-import React, { useEffect, useState } from "react"
+
+import { registerUser } from "@utils/api"
+import { SignFormProps } from "@utils/interface"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import { BirthDateComponent, GenderButton } from "@components/signup"
-import InputComponent from "@components/signup/InputComponent"
-import { registerUser } from "@components/signup/api"
-import { SignFormProps } from "../utils"
-import { classNameStyle } from "../styles"
+
+import Button from "@components/common/Button"
+import GenderButton from "@components/common/GenderButton"
+import Input from "@components/common/Input"
+import InputComponent from "@components/common/InputComponent"
+import BirthDateComponent from "./BirthDateComponent"
 
 const SignForm: React.FC = () => {
+  // TODO: Enum 사용
   const [selectedGender, setSelectedGender] = useState<"MALE" | "FEMALE" | null>(null)
   const [selectedDate, setSelectedDate] = useState<string | null>("")
 
@@ -26,8 +31,10 @@ const SignForm: React.FC = () => {
   } = useForm<SignFormProps>({
     mode: "onBlur",
   })
+
+  //TODO: forwardRef
   const renderInputComponent = (
-    labelname: string,
+    labelName: string,
     name: string,
     label: string,
     rules?: Record<string, unknown>,
@@ -35,29 +42,18 @@ const SignForm: React.FC = () => {
   ) => (
     <InputComponent
       control={control}
-      labelname={labelname}
+      labelName={labelName}
       name={name}
       rules={rules}
       placeholder={`Enter your ${label}`}
-      classNames={classNameStyle}
       errors={errors}
       type={type}
     />
   )
 
   const onSubmitForm = async (data: SignFormProps) => {
-    const formData = {
-      userId: data.userId,
-      email: data.email,
-      password: data.password,
-      phoneNumber: data.phoneNumber,
-      gender: selectedGender,
-      username: data.username,
-      nickname: data.nickname,
-      birthDate: selectedDate,
-    }
     try {
-      await registerUser(formData)
+      await registerUser({ ...data, gender: selectedGender, birthDate: selectedDate })
     } catch (error) {
       console.error("회원가입 실패:", error)
     }
@@ -69,20 +65,8 @@ const SignForm: React.FC = () => {
   const emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
   const PhoneNumberPattern = /^010-\d{4}-\d{4}$/
 
-  const isFormValid =
-    Object.keys(errors).length === 0 &&
-    Object.values(watch()).every((value) => value !== "") &&
-    watch("password") === watch("repassword") &&
-    selectedDate !== "" &&
-    (selectedGender === "MALE" || selectedGender === "FEMALE") &&
-    selectedGender !== null &&
-    watch("email") !== "" &&
-    watch("phoneNumber") !== "" &&
-    watch("email")?.match(emailPattern) &&
-    watch("phoneNumber")?.match(PhoneNumberPattern)
-
   return (
-    <form className="flex flex-col items-center justify-center h-full w-full" onSubmit={handleSubmit(onSubmitForm)}>
+    <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmitForm)}>
       {renderInputComponent("아이디", "userId", "ID", { maxLength: 10, minLength: 3 })}
       {renderInputComponent(
         "비밀번호",
@@ -112,6 +96,7 @@ const SignForm: React.FC = () => {
         },
         "password",
       )}
+
       {renderInputComponent("이름", "username", "Name", { maxLength: 10, minLength: 3 })}
       {renderInputComponent("닉네임", "nickname", "Nickname", { maxLength: 10, minLength: 2 })}
       <BirthDateComponent selectedDate={selectedDate} onDateChange={handleDateChange} />
@@ -135,11 +120,8 @@ const SignForm: React.FC = () => {
         },
         maxLength: { value: 13, message: "Maximum length is 13 characters." },
       })}
-      <button
-        className={`mt-8 bg-submit-bg-color text-white w-80 h-12 ${isFormValid ? "" : "cursor-not-allowed opacity-50"}`}
-      >
-        회원가입
-      </button>
+      <Input placeholder="sdasdas" />
+      <Button className={`mt-8 w-full`}>회원가입</Button>
     </form>
   )
 }

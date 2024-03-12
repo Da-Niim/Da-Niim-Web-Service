@@ -3,9 +3,10 @@ import addressicon from "@assets/icons/address.png"
 import imgposticon from "@assets/icons/imgpost.png"
 import vectoricon from "@assets/icons/vector.png"
 import withicon from "@assets/icons/with.png"
+import { axiosInstance } from "@utils/axios"
+import Image from "next/image"
 import React, { useState } from "react"
-import dummyData from "../dummydata"
-
+// TODO : react-hook-form 사용하여 form 처리하기
 interface PostPageProps {
   clickModal: () => void
 }
@@ -25,12 +26,9 @@ const PostPage: React.FC = () => {
   const [previewImages, setPreviewImages] = useState<string[]>([])
 
   const handleImageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
-    if (files) {
-      const newImages = Array.from(files)
+    if (e.target.files) {
+      const newImages = Array.from(e.target.files)
       setSelectedImages((prevImages) => [...prevImages, ...newImages])
-      const newPreviewImages = newImages.map((image) => URL.createObjectURL(image))
-      setPreviewImages((prevImages) => [...prevImages, ...newPreviewImages])
     }
   }
 
@@ -57,7 +55,7 @@ const PostPage: React.FC = () => {
     }
   }
 
-  const handlePostButtonClick = () => {
+  const handlePostButtonClick = async () => {
     const formData = {
       title,
       comment,
@@ -65,32 +63,20 @@ const PostPage: React.FC = () => {
       files,
     }
 
-    const token = localStorage.getItem("authToken")
-
-    if (!token) {
-      console.error("AuthToken not found in localStorage")
-      return
-    }
-
-    console.log(token)
-
-    fetch("http://localhost:8080/feeds", {
+    await axiosInstance("/feeds", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(formData),
+      // TODO: formData를 서버로 전송하기
+      // body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Post request successful:", data)
-      })
+      .then((response) => response.data)
       .catch((error) => {
         console.error("Error during POST request:", error)
       })
   }
-  const filteredData = dummyData.filter((data) => data.postId === 1)
+
   return (
     <div className="fixed top-0 left-0 w-screen h-full bg-black bg-opacity-40 flex justify-center items-center">
       <div className="flex items-center justify-center w-5/10 bg-white rounded-lg">
@@ -100,19 +86,19 @@ const PostPage: React.FC = () => {
             <input type="text" name="title" className="w-1/2 text-center" placeholder="제목을 입력해주세요" />
             <button onClick={handleXButtonClick}>X</button>
           </div>
-          {filteredData.map((data) => (
+          {/* {filteredData.map((data) => (
             <div key={data.postId} className="p-3 border-b-2 border-gray-300 flex items-center">
               <div className="p-1 overflow-hidden rounded-full border-2 border-black mr-4">
                 <img src={data.userimg} alt="userimg" className="w-full h-full object-cover" />
               </div>
               <div className="mt-2 p-1">{data.username}</div>
             </div>
-          ))}
+          ))} */}
           <div className="p-3 flex justify-end border-b-2 border-gray-300">
             <div className="mr-auto">{location ? <p>위치: {location}</p> : <p>위치 정보가 없습니다</p>}</div>
-            <img src={vectoricon.src} alt="vector icon" className="m-1" />
-            <img
-              src={addressicon.src}
+            <Image src={vectoricon} alt="vector icon" className="m-1" />
+            <Image
+              src={addressicon}
               alt="adress Icon"
               className="m-1 cursor-pointer"
               onClick={handleAddressIconClick}
@@ -125,18 +111,18 @@ const PostPage: React.FC = () => {
               onChange={handleImageInputChange}
               multiple
             />
-            <img
-              src={imgposticon.src}
+            <Image
+              src={imgposticon}
               alt="Image Post Icon"
               className="m-1 cursor-pointer"
               onClick={handleImagePostIconClick}
             />
-            <img src={withicon.src} alt="With Icon" className="m-1" />
+            <Image src={withicon} alt="With Icon" className="m-1" />
           </div>
           <div className="p-3 flex justify-center items-center overflow-x-auto">
             <div className="flex flex-row items-center">
               {previewImages.map((image, index) => (
-                <img key={index} src={image} alt={`미리보기 ${index + 1}`} className={"w-[450px] h-[450px] m-3"} />
+                <Image key={index} src={image} alt={`미리보기 ${index + 1}`} className={"w-[450px] h-[450px] m-3"} />
               ))}
             </div>
           </div>

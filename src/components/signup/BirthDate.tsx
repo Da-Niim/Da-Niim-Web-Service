@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react"
-import { BirthDateSelectorProps } from "./utils/interface"
+import { BirthDateSelectorProps } from "@utils/interface/SignUpInterface"
 
 const BirthDateSelector = forwardRef<HTMLSelectElement, BirthDateSelectorProps>(({ label, values, onChange }, ref) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

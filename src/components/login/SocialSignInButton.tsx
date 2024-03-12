@@ -6,7 +6,7 @@ type IProps = {
   providers: Record<string, ClientSafeProvider>
 }
 
-export default function SocialSigninButton({ providers }: IProps) {
+export default function SocialSignInButton({ providers }: IProps) {
   return (
     <div>
       {Object.values(providers).map((provider) => (
