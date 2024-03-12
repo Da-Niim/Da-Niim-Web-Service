@@ -1,8 +1,8 @@
-const API_URL = "http://localhost:8080"
 //TODO: axiosInstance + any제거
 const registerUser = async (formData: any) => {
   try {
-    const response = await fetch(`${API_URL}/user/register`, {
+    const response = await fetch(`http://52.79.175.72:8080/user/register`, {
+      // const response = await fetch(`${process.env.ServerDefaultUrl}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

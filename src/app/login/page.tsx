@@ -2,9 +2,9 @@
 import { Input } from "@nextui-org/react"
 import { axiosInstance } from "@utils/axios"
 import { useRouter } from "next/navigation"
-import { FormEvent, useEffect, useState,useRef } from "react"
-import { signIn,getProviders } from "next-auth/react"
-
+import { FormEvent, useEffect, useState, useRef, useContext } from "react"
+import { useSession, signIn, getProviders } from "next-auth/react"
+import { getToken } from "next-auth/jwt"
 // const classNameStyle = {
 //   input: [
 //     "bg-input-bg-color",
@@ -41,72 +41,39 @@ function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false)
   const [username, setUsername] = useState("")
 
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const [providers, setProviders] = useState(null);
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
+  const [providers, setProviders] = useState(null)
 
-  useEffect(() => {
-    (async () => {
-      const res: any = await getProviders();
-      console.log(res);
-      setProviders(res);
-    })();
-  }, []);
-
-  const router = useRouter()
-  // TODO: Custom Hooks로 빼기
   useEffect(() => {
     const savedUsername = localStorage.getItem("savedUsername")
     if (savedUsername) {
       setUsername(savedUsername)
       setRememberUsername(true)
     }
+    ;(async () => {
+      const res: any = await getProviders()
+      setProviders(res)
+    })()
   }, [])
 
+  const router = useRouter()
+  // TODO: Custom Hooks로 빼기
 
   const handleSubmit = async () => {
     const result = await signIn("credentials", {
       username: emailRef.current,
       password: passwordRef.current,
       redirect: true,
-      callbackUrl: "/",
-    });
+      callbackUrl: "basedUrl",
+    })
   }
   const handleKakao = async () => {
     const result = await signIn("kakao", {
       redirect: true,
-      callbackUrl: "/",
-    });
-  };
-
-  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault()
-
-  //   const username: string = (e.target as HTMLFormElement).username.value
-  //   const password: string = (e.target as HTMLFormElement).password.value
-
-
-  //   try {
-  //     const response = await axiosInstance.post("/auth/login",{}, {
-  //       auth: {
-  //         username,
-  //         password,
-  //       },
-  //     })
-  //     console.log(response.data)
-  //     if (response.data) {
-  //       //TODO: Storage 저장
-  //       if (rememberUsername) {
-  //         localStorage.setItem("savedUsername", username)
-  //       }
-  //       router.push("/")
-  //     }
-  //   } catch (error) {
-  //     // TODO : Modal창이나 다른 에러처리 필요
-  //     setError("아이디 또는 비밀번호가 올바르지 않습니다.")
-  //     console.error("로그인 실패:", error)
-  //   }
-  // }
+      callbackUrl: "basedUrl",
+    })
+  }
 
   const handleRememberUsername = () => {
     // TODO:  체크 해제시에만 제거
@@ -118,10 +85,11 @@ function LoginPage() {
       <div className="flex flex-col  justify-center h-full">
         <label className="pl-2px pb-1">Da-Niim 에 로그인 </label>
         <div className="flex flex-col my-5 w-80">
-          <div className="flex flex-col w-80"><input
+          <div className="flex flex-col w-80">
+            <input
               ref={emailRef}
               onChange={(e: any) => {
-                emailRef.current = e.target.value;
+                emailRef.current = e.target.value
               }}
               id="email"
               name="email"
@@ -133,7 +101,7 @@ function LoginPage() {
         </div>
         <div className="flex flex-col my-5 w-80">
           <div className="flex flex-col  w-80">
-          <input
+            <input
               type="password"
               id="password"
               name="password"
@@ -174,11 +142,11 @@ function LoginPage() {
         </button>
       </div>
       <button
-          className="w-full transform rounded-md bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
-          onClick={() => signIn("naver", { redirect: true, callbackUrl: "/" })}
-        >
-          naver login
-        </button>
+        className="w-full transform rounded-md bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
+        onClick={() => signIn("naver", { redirect: true, callbackUrl: "/" })}
+      >
+        naver login
+      </button>
     </div>
   )
 }

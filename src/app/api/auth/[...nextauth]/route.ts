@@ -16,10 +16,11 @@ const handler = NextAuth({
         password: { label: "비밀번호", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/auth/login`, {
+        const res = await fetch(`http://52.79.175.72:8080/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Basic ${btoa(credentials?.username + ":" + credentials?.password)}`,
           },
           body: JSON.stringify({
             username: credentials?.username,
@@ -27,7 +28,8 @@ const handler = NextAuth({
           }),
         })
         const user = await res.json()
-        console.log(user)
+
+        // console.log(user)
         if (user) {
           return user
         } else {
@@ -45,16 +47,19 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, account, user }) {
       return { ...token, ...user }
     },
-
-    async session({ session, token }) {
-      session.user = token as any
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      session.accessToken = token.accessToken
       return session
     },
+    async redirect({ url, baseUrl }) {
+      const basedUrl = "/login"
+      return basedUrl
+    },
   },
-
   pages: {
     signIn: "/login",
   },
