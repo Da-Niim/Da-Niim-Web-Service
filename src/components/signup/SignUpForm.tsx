@@ -2,6 +2,7 @@
 import InputComponent from "@components/common/button/InputComponent"
 
 import Button from "@components/common/button/Button"
+import Input from "@components/common/button/Input"
 import { registerUser } from "@utils/api"
 import { SignFormProps } from "@utils/interface"
 import React, { useState } from "react"
@@ -118,7 +119,8 @@ const SignForm: React.FC = () => {
         },
         maxLength: { value: 13, message: "Maximum length is 13 characters." },
       })}
-      <Button className={`mt-8 w-full `}>회원가입</Button>
+      <Input placeholder="sdasdas" />
+      <Button className={`mt-8 w-full`}>회원가입</Button>
     </form>
   )
 }
