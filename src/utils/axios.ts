@@ -10,8 +10,7 @@ axiosInstance.interceptors.request.use(
   async function (config) {
     const session = await getSession()
     if (session && session.accessToken) {
-      config.headers.Authorization = `Bearer ${session?.accessToken}`
-      console.log(session)
+      config.headers.Authorization = `Bearer ${session.accessToken}`
     }
     return config
   },
