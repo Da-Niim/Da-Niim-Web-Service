@@ -32,9 +32,8 @@ import { useEffect, useRef, useState } from "react"
 
 // export default classNameStyle
 
-// TODO: ussForm 적용
+// TODO: 로그인 리프레쉬 토큰 로직 구현 ( 로그인 상태 유지 )
 function LoginPage() {
-  const [error, setError] = useState<string | null>(null)
   const [rememberUsername, setRememberUsername] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [username, setUsername] = useState("")
@@ -49,11 +48,7 @@ function LoginPage() {
       setUsername(savedUsername)
       setRememberUsername(true)
     }
-    ;(async () => {
-      const res: any = await getProviders()
-      setProviders(res)
-    })()
-  }, [])
+  })
 
   const router = useRouter()
   // TODO: Custom Hooks로 빼기
@@ -66,16 +61,11 @@ function LoginPage() {
       callbackUrl: "basedUrl",
     })
   }
-  const handleKakao = async () => {
-    const result = await signIn("kakao", {
-      redirect: true,
-      callbackUrl: "basedUrl",
-    })
-  }
 
   const handleRememberUsername = () => {
-    // TODO:  체크 해제시에만 제거
-    localStorage.removeItem("savedUsername")
+    if (username) {
+      localStorage.removeItem("savedUsername")
+    }
   }
   // TODO: ClassName => Tailwind css
   return (
@@ -113,9 +103,9 @@ function LoginPage() {
           <div className="flex flex-row my-5 w-80">
             <input
               type="checkbox"
-              checked={rememberUsername}
+              checked={rememberMe}
               onChange={(e) => {
-                setRememberUsername(e.target.checked)
+                setRememberMe(e.target.checked)
                 if (!e.target.checked) {
                   setRememberMe(false)
                 }
@@ -124,7 +114,7 @@ function LoginPage() {
             <label className="ml-2">로그인 상태 유지</label>
           </div>
           <div className="flex flex-row my-5 w-80">
-            <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
+            <input type="checkbox" checked={rememberUsername} onChange={(e) => setRememberUsername(e.target.checked)} />
             <label className="ml-2">아이디 저장</label>
           </div>
         </div>
