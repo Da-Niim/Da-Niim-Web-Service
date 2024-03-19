@@ -31,17 +31,6 @@ const handler = NextAuth({
             },
           },
         )
-
-        // const res = await fetch(`http://52.79.175.72:8080/auth/login`, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     authorization: `Basic ${btoa(credentials?.username + ":" + credentials?.password)}`,
-        //   },
-        // })
-        // const user = await res.json()
-
-        // console.log(user)
         if (data) {
           return data
         } else {
@@ -59,21 +48,21 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, account, user }) {
+    async jwt({ token, user }) {
       return { ...token, ...user }
     },
-    async session({ session, token, user }) {
-      // Send properties to the client, like an access_token and user id from a provider.
+    async session({ session, token }) {
       session.accessToken = token.accessToken
       return session
     },
     async redirect({ url, baseUrl }) {
-      const basedUrl = "/login"
+      const basedUrl = "/"
       return basedUrl
     },
   },
   pages: {
     signIn: "/login",
+    signOut: "",
   },
 })
 

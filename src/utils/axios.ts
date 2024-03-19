@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from "axios"
-import { getSession } from "next-auth/react"
+import { getServerSession } from "next-auth"
 
 export const axiosInstance: AxiosInstance = axios.create({
   //   baseURL: `${process.env.ServerDefaultUrl}`,
@@ -8,7 +8,7 @@ export const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async function (config) {
-    const session = await getSession()
+    const session = await getServerSession()
     if (session && session.accessToken) {
       config.headers.Authorization = `Bearer ${session.accessToken}`
     }
