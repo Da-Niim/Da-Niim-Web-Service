@@ -1,18 +1,21 @@
+import { useGetMyFeeds } from "@hooks/useGetMyFeeds"
 import PostContent from "../atoms/PostContent"
 
 const PostContainer = () => {
+  const { data } = useGetMyFeeds()
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full mt-6 gap-2">
-      <PostContent />
-      <PostContent />
-      <PostContent />
-      <PostContent />
-      <PostContent />
-      <PostContent />
-      <PostContent />
-      <PostContent />
-      <PostContent />
-      <PostContent />
+    <div className="grid grid-cols-2 lg:grid-cols-3 w-full mt-6 gap-2">
+      {data?.data.map((feed) => {
+        return (
+          <PostContent
+            id={feed.id}
+            commentCount={feed.commentCount}
+            likeCount={feed.likeCount}
+            photoUrl={feed.photoUrl}
+            key={feed.id}
+          />
+        )
+      })}
     </div>
   )
 }
