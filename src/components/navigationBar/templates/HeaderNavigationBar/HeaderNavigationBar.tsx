@@ -10,7 +10,7 @@ export default function HeaderNavigationBar() {
   const { data } = useSession()
 
   return (
-    <div className="w-full flex items-center h-[6.25rem] border border-solid border-bottom-[#D7D7D7] justify-between px-[3vw]">
+    <div className="w-full flex items-center py-8 border border-solid border-bottom-[#D7D7D7] justify-between px-[3vw]">
       <NavigationBarLogoComponent />
 
       <HeaderSearchComponent />
