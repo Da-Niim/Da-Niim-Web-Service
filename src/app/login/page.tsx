@@ -2,53 +2,30 @@
 import Button from "@components/common/Button"
 import Input from "@components/common/Input"
 import { getProviders, signIn, signOut } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useForm } from "react-hook-form"
+import NaverLoginBtn from "@assets/icons/NaverLoginBtn.png"
 
 // TODO: 로그인 리프레쉬 토큰 로직 구현 ( 로그인 상태 유지 )
 function LoginPage() {
-  const [rememberUsername, setRememberUsername] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
-  const [username, setUsername] = useState("")
+  const { register, handleSubmit } = useForm()
 
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-
-  useEffect(() => {
-    const savedUsername = localStorage.getItem("savedUsername")
-    if (savedUsername) {
-      setUsername(savedUsername)
-      setRememberUsername(true)
-    }
-  }, [])
-
-  const router = useRouter()
-  const handleSubmit = async () => {
+  const onSubmit = async (data: any) => {
     const result = await signIn("credentials", {
-      username: emailRef.current,
-      password: passwordRef.current,
+      username: data.email,
+      password: data.password,
       redirect: true,
       callbackUrl: "basedUrl",
     })
   }
-  // TODO: 유저 아이디 기억 저장 로직 구현
-  const handleRememberUsername = () => {
-    if (username) {
-      localStorage.removeItem("savedUsername")
-    }
-  }
+
   return (
     <div className="flex flex-col items-center justify-center h-full w-full">
-      <div className="flex flex-col  justify-center h-full">
+      <div className="flex flex-col justify-center h-full">
         <label className="pl-2px pb-1">Da-Niim 에 로그인 </label>
         <div className="flex flex-col my-5 w-80">
           <div className="flex flex-col w-80">
-            <input
-              ref={emailRef}
-              onChange={(e: any) => {
-                e.preventDefault()
-                emailRef.current = e.target.value
-              }}
+            <Input
+              {...register("email", { required: true })}
               id="email"
               name="email"
               type="email"
@@ -59,59 +36,23 @@ function LoginPage() {
         </div>
         <div className="flex flex-col my-5 w-80">
           <div className="flex flex-col w-80">
-            <input
-              ref={passwordRef}
-              onChange={(e: any) => {
-                e.preventDefault()
-                passwordRef.current = e.target.value
-              }}
-              type="password"
-              id="password"
-              name="password"
-            />
+            <Input {...register("password", { required: true })} type="password" id="password" name="password" />
           </div>
         </div>
-        <Button onClick={handleSubmit}>로그인</Button>
-        <div className="flex flex-row w-80">
-          <div className="flex flex-row my-5 w-80">
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => {
-                setRememberMe(e.target.checked)
-                if (!e.target.checked) {
-                  setRememberMe(false)
-                }
-              }}
-            />
-            <label className="ml-2">로그인 상태 유지</label>
-          </div>
-          <div className="flex flex-row my-5 w-80">
-            <input type="checkbox" checked={rememberUsername} onChange={(e) => setRememberUsername(e.target.checked)} />
-            <label className="ml-2">아이디 저장</label>
-          </div>
-        </div>
+        <Button className="w-[100%]" onClick={handleSubmit(onSubmit)}>
+          로그인
+        </Button>
       </div>
       <div>
-        <button
-          className="w-[50%] transform rounded-md bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
-          onClick={() => signIn("kakao", { redirect: false, callbackUrl: "/" })}
-        >
-          kakao login
-        </button>
-
-        <button
-          className="w-[50%] transform rounded-md bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
-          onClick={() => signIn("naver", { redirect: true, callbackUrl: "/" })}
-        >
-          naver login
-        </button>
-        <button
-          className="w-full transform rounded-md bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
-          onClick={() => signOut()}
-        >
+        <Button className="w-[50%] transform" onClick={() => signIn("kakao", { redirect: false, callbackUrl: "/" })}>
+          Kakao 로그인
+        </Button>
+        <Button className="w-[50%] transform" onClick={() => signIn("naver", { redirect: true, callbackUrl: "/" })}>
+          Naver 로그인
+        </Button>
+        <Button className="w-full transform" onClick={() => signOut()}>
           SignOut
-        </button>
+        </Button>
       </div>
     </div>
   )
