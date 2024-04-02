@@ -11,25 +11,34 @@ export interface SignFormProps {
   key?: string
 }
 
+export enum Gender {
+  MALE = "MALE",
+  FEMALE = "FEMALE",
+}
 export interface InputProps {
   control: any
   labelName: string
   name: string
   rules: any
   placeholder: string
-  classNames?: {
-    input: string[]
-    inputWrapper: string[]
-  }
   errors: any
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   type?: string
 }
 
-export interface GenderButtonProps {
-  gender: "MALE" | "FEMALE"
-  selectedGender: "MALE" | "FEMALE" | null
-  handleGenderSelection: (gender: "MALE" | "FEMALE") => void
+export interface UserValue {
+  email: string
+  password: string
+  rePassword: string
+  nickname: string
+  userId: string
+  username: string
+  gender: Gender.MALE | Gender.FEMALE
+  years: string
+  months: string
+  days: string
+  phoneNumber: string
+  birthDate: string
 }
 
 export interface BirthDateSelectorProps {
