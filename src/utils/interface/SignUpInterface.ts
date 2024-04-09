@@ -1,3 +1,4 @@
+import { genderType } from "@components/signUp/util"
 export interface SignFormProps {
   username: string
   userId: string
@@ -11,10 +12,6 @@ export interface SignFormProps {
   key?: string
 }
 
-export enum Gender {
-  MALE = "MALE",
-  FEMALE = "FEMALE",
-}
 export interface InputProps {
   control: any
   labelName: string
@@ -33,7 +30,7 @@ export interface UserValue {
   nickname: string
   userId: string
   username: string
-  gender: Gender.MALE | Gender.FEMALE
+  gender: genderType.MALE | genderType.FEMALE
   years: string
   months: string
   days: string
