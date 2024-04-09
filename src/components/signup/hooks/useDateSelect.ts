@@ -1,4 +1,4 @@
-export const dateSelect = () => {
+export const useDateSelect = () => {
   const now = new Date()
 
   const years = Array.from({ length: now.getFullYear() - 1929 }, (_, index) => now.getFullYear() - index)

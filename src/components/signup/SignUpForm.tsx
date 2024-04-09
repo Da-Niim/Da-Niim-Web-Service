@@ -7,7 +7,8 @@ import { UserValue, SignFormProps } from "@utils/interface/SignUpInterface"
 import { registerUser } from "@utils/api"
 import { useForm } from "react-hook-form"
 import { idPattern, passwordPattern, emailPattern, phoneNumberPattern, genderType } from "./util"
-import { dateSelect } from "./hooks"
+import { useDateSelect } from "./hooks"
+import { useRouter } from "next/router"
 
 const SignForm: React.FC = () => {
   const {
@@ -20,10 +21,11 @@ const SignForm: React.FC = () => {
     mode: "onSubmit",
     defaultValues: {},
   })
-  const { years, months, days } = dateSelect()
+  const { years, months, days } = useDateSelect()
   const handleGenderSelection = (selectedGender: genderType) => {
     setValue("gender", selectedGender)
   }
+  const router = useRouter()
   const onSubmitForm = async (data: SignFormProps) => {
     const DateSelect = `${watch("years")}` + "-" + `${watch("months")}` + "-" + `${watch("days")}`
     const formData = {
@@ -31,9 +33,15 @@ const SignForm: React.FC = () => {
       birthDate: DateSelect,
     }
     try {
-      await registerUser(formData)
-    } catch (error) {}
+      const response = await registerUser(formData)
+      if (response.ok) {
+        router.push("/login")
+      }
+    } catch (error) {
+      console.error("Registration failed:", error)
+    }
   }
+
   return (
     <form className="flex flex-col items-center justify-center w-80" onSubmit={handleSubmit(onSubmitForm)}>
       <InputWithLabel
