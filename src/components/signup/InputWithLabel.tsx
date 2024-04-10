@@ -1,4 +1,5 @@
 import React from "react"
+import Input from "@components/common/Input"
 
 interface InputProps {
   label: string
@@ -22,7 +23,7 @@ const InputWithLabel: React.FC<InputProps> = ({
   return (
     <div className="w-full p-2 flex flex-col">
       <label>{label}</label>
-      <input type={type} {...register(name, { pattern })} placeholder={placeholder} />
+      <Input type={type} {...register(name, { pattern })} placeholder={placeholder} />
       {error && <div className="justify-start w-full pl-2">{error}</div>}
     </div>
   )
