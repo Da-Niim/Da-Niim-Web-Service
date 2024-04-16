@@ -25,8 +25,8 @@ const SignForm: React.FC = () => {
   const handleGenderSelection = (selectedGender: genderType) => {
     setValue("gender", selectedGender)
   }
-  const router = useRouter()
   const onSubmitForm = async (data: SignFormProps) => {
+    const router = useRouter()
     const DateSelect = `${watch("years")}` + "-" + `${watch("months")}` + "-" + `${watch("days")}`
     const formData = {
       ...data,

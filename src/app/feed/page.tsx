@@ -47,8 +47,6 @@ function FeedPage() {
       <SubTab activeSubTab={activeSubTab} handleSubTabClick={handleSubTabClick} tabNames={tabNames} />
       <div>
         {activeTab === "feed" && <FeedList initialData={[]} />}
-        {/* {activeTab === "travel" && <TravelList data={initialData} />} */}
-        {/* {activeTab === "feed" && <FeedList />} */}
         {activeTab === "travel" && <TravelList initialData={[]} />}
       </div>
     </div>
