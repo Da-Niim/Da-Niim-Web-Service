@@ -1,126 +1,143 @@
 "use client"
-
-import { registerUser } from "@utils/api"
-import { SignFormProps } from "@utils/interface"
-import React, { useState } from "react"
-import { useForm } from "react-hook-form"
-
+import React from "react"
 import Button from "@components/common/Button"
+import InputWithLabel from "./InputWithLabel"
 import GenderButton from "@components/common/GenderButton"
-import Input from "@components/common/Input"
-import InputComponent from "@components/common/InputComponent"
-import BirthDateComponent from "./BirthDateComponent"
+import { UserValue, SignFormProps } from "@utils/interface/SignUpInterface"
+import { registerUser } from "@utils/api"
+import { useForm } from "react-hook-form"
+import { idPattern, passwordPattern, emailPattern, phoneNumberPattern, genderType } from "./util"
+import { useDateSelect } from "./hooks"
+import { useRouter } from "next/router"
 
 const SignForm: React.FC = () => {
-  // TODO: Enum 사용
-  const [selectedGender, setSelectedGender] = useState<"MALE" | "FEMALE" | null>(null)
-  const [selectedDate, setSelectedDate] = useState<string | null>("")
-
-  const handleGenderSelection = (gender: "MALE" | "FEMALE") => {
-    setSelectedGender(gender)
-  }
-  const handleDateChange = (date: string | null) => {
-    setSelectedDate(date)
-  }
-
   const {
-    control,
+    register,
+    watch,
+    setValue,
     handleSubmit,
     formState: { errors },
-    watch,
-  } = useForm<SignFormProps>({
-    mode: "onBlur",
+  } = useForm<UserValue>({
+    mode: "onSubmit",
+    defaultValues: {},
   })
-
-  //TODO: forwardRef
-  const renderInputComponent = (
-    labelName: string,
-    name: string,
-    label: string,
-    rules?: Record<string, unknown>,
-    type?: string,
-  ) => (
-    <InputComponent
-      control={control}
-      labelName={labelName}
-      name={name}
-      rules={rules}
-      placeholder={`Enter your ${label}`}
-      errors={errors}
-      type={type}
-    />
-  )
-
+  const { years, months, days } = useDateSelect()
+  const handleGenderSelection = (selectedGender: genderType) => {
+    setValue("gender", selectedGender)
+  }
+  const router = useRouter()
   const onSubmitForm = async (data: SignFormProps) => {
+    const DateSelect = `${watch("years")}` + "-" + `${watch("months")}` + "-" + `${watch("days")}`
+    const formData = {
+      ...data,
+      birthDate: DateSelect,
+    }
     try {
-      await registerUser({ ...data, gender: selectedGender, birthDate: selectedDate })
+      const response = await registerUser(formData)
+      if (response.ok) {
+        router.push("/login")
+      }
     } catch (error) {
-      console.error("회원가입 실패:", error)
+      console.error("Registration failed:", error)
     }
   }
 
-  const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/
-  const passwordMessage = `영문(대소문자), 숫자, 특수 문자를 혼합하여
-  8자 이상 20자 이내로 입력해주세요.`
-  const emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
-  const PhoneNumberPattern = /^010-\d{4}-\d{4}$/
-
   return (
-    <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmitForm)}>
-      {renderInputComponent("아이디", "userId", "ID", { maxLength: 10, minLength: 3 })}
-      {renderInputComponent(
-        "비밀번호",
-        "password",
-        "Password",
-        {
-          maxLength: 20,
-          minLength: 8,
-          pattern: {
-            value: passwordPattern,
-            message: passwordMessage,
-          },
-        },
-        "password",
-      )}
-      {renderInputComponent(
-        "비밀번호 확인",
-        "repassword",
-        "Password Confirmation",
-        {
-          maxLength: 20,
-          minLength: 8,
-          pattern: {
-            value: passwordPattern,
-            message: passwordMessage,
-          },
-        },
-        "password",
-      )}
-
-      {renderInputComponent("이름", "username", "Name", { maxLength: 10, minLength: 3 })}
-      {renderInputComponent("닉네임", "nickname", "Nickname", { maxLength: 10, minLength: 2 })}
-      <BirthDateComponent selectedDate={selectedDate} onDateChange={handleDateChange} />
-      <div className="flex flex-col w-80">
+    <form className="flex flex-col items-center justify-center w-80" onSubmit={handleSubmit(onSubmitForm)}>
+      <InputWithLabel
+        label="아이디"
+        register={register}
+        name="userId"
+        placeholder="아이디 입력 해 주세요"
+        error={errors.userId && "ID는 3~10 글자로 입력해 주세요"}
+        pattern={idPattern}
+      />
+      <InputWithLabel
+        label="비밀번호"
+        register={register}
+        name="password"
+        type="password"
+        placeholder="비밀번호를 입력 해 주세요"
+        error={errors.password && "영문(대소문자), 숫자, 특수 문자를 혼합하여 8자 이상 20자 이내로 입력해주세요."}
+        pattern={passwordPattern}
+      />
+      <InputWithLabel
+        label="비밀번호 확인"
+        register={register}
+        name="rePassword"
+        type="password"
+        placeholder="비밀번호를 입력 확인"
+        error={watch("rePassword") !== watch("rePassword") && "비밀번호를 확인 해주세요"}
+        pattern={passwordPattern}
+      />
+      <InputWithLabel
+        label="이름"
+        register={register}
+        name="username"
+        placeholder="이름을 입력 해 주세요"
+        error={errors.username && "이름을 확인 해 주세요"}
+      />
+      <InputWithLabel
+        label="닉네임"
+        register={register}
+        name="nickname"
+        placeholder="닉네임을 입력 해 주세요"
+        error={errors.nickname && "닉네임을 확인 해 주세요"}
+      />
+      <div className="w-full p-2">생년월일</div>
+      <div className="flex w-full justify-around h-12">
+        <select {...register("years")}>
+          {years.map((item) => (
+            <option value={item} key={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <select {...register("months")}>
+          {months.map((item) => (
+            <option value={item} key={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <select {...register("days")}>
+          {days.map((item) => (
+            <option value={item} key={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex-col w-full">
         <label className="pl-2px pb-1">성별 </label>
-        <div className="flex flex-row justify-between  w-80">
-          <GenderButton gender="MALE" selectedGender={selectedGender} handleGenderSelection={handleGenderSelection} />
-          <GenderButton gender="FEMALE" selectedGender={selectedGender} handleGenderSelection={handleGenderSelection} />
+        <div className="flex flex-row justify-between">
+          {Object.values(genderType).map((gender) => (
+            <GenderButton
+              key={gender}
+              gender={gender}
+              isSelected={watch("gender") === gender}
+              onClick={() => handleGenderSelection(gender)}
+            />
+          ))}
         </div>
       </div>
-      {renderInputComponent("이메일", "email", "E-mail", {
-        pattern: {
-          value: emailPattern,
-          message: "Invalid email format.",
-        },
-      })}
-      {renderInputComponent("핸드폰 번호", "phoneNumber", "Phone Number", {
-        pattern: {
-          value: PhoneNumberPattern,
-          message: "Invalid phone number format.",
-        },
-        maxLength: { value: 13, message: "Maximum length is 13 characters." },
-      })}
-      <Input placeholder="sdasdas" />
+      <InputWithLabel
+        label="휴대폰 번호"
+        register={register}
+        name="phoneNumber"
+        placeholder="휴대폰번호를 입력 해 주세요"
+        error={errors.phoneNumber && "010-XXXX-XXXX 형식으로 입력해주세요"}
+        pattern={phoneNumberPattern}
+      />
+      <InputWithLabel
+        label="이메일"
+        register={register}
+        name="email"
+        type="email"
+        placeholder="이메일을 입력 해 주세요"
+        error={errors.email && "이메일을 확인해 주세요"}
+        pattern={emailPattern}
+      />
       <Button className={`mt-8 w-full`}>회원가입</Button>
     </form>
   )
