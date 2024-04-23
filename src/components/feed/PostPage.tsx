@@ -36,9 +36,7 @@ const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
           const { latitude, longitude } = position.coords
           setValue("location", `위도: ${latitude}, 경도: ${longitude}`)
         },
-        (error) => {
-          console.error("위치 정보를 가져오는 동안 오류 발생:", error.message)
-        },
+        (error) => {},
       )
     } else {
     }
@@ -72,10 +70,7 @@ const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
           "Content-Type": "multipart/form-data",
         },
       })
-      console.log("Post created successfully")
-    } catch (error) {
-      console.error("Error during POST request:", error)
-    }
+    } catch (error) {}
   })
 
   const images = watch("images", [])

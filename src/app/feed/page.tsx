@@ -1,9 +1,8 @@
 "use client"
 import { fetchData } from "@utils/api"
 import FeedList from "@components/feed/FeedList"
-
-import SubTab from "@components/feed/SubTab"
-import Tab from "@components/feed/Tab"
+import SubTab from "@components/feed/feedSubTab"
+import Tab from "@components/feed/feedTopTab"
 import TravelList from "@components/feed/TravelList"
 
 import { useEffect, useState } from "react"
@@ -34,7 +33,6 @@ function FeedPage() {
       const fetchedData = await fetchData(subTabName)
     } catch (error) {
       //TODO : 에러처리 필요
-      console.error("Error fetching data:", error)
     }
   }
 
