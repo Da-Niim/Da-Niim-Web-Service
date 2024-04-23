@@ -8,7 +8,7 @@ import { registerUser } from "@utils/api"
 import { useForm } from "react-hook-form"
 import { idPattern, passwordPattern, emailPattern, phoneNumberPattern, genderType } from "./util"
 import { useDateSelect } from "./hooks"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 const SignForm: React.FC = () => {
   const {

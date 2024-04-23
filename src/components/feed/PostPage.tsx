@@ -1,6 +1,5 @@
 "use client"
 import React from "react"
-import Button from "@components/common/Button"
 import { axiosInstance } from "@utils/axios"
 import { useForm } from "react-hook-form"
 import Image from "next/image"
@@ -18,12 +17,13 @@ interface FormValues {
   expenses: string
   numOfPeople: string
 }
-
-const PostPage: React.FC = () => {
+interface PostPageProps {
+  onClose?: () => void
+}
+const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
   const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
     defaultValues: {},
   })
-
   const handleImageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : []
     setValue("images", files)
@@ -78,6 +78,8 @@ const PostPage: React.FC = () => {
     }
   })
 
+  const images = watch("images", [])
+
   return (
     <div className="fixed top-0 left-0 w-screen h-full bg-black bg-opacity-40 flex justify-center items-center">
       <div className="flex items-center justify-center w-5/10 bg-white rounded-lg">
@@ -85,11 +87,20 @@ const PostPage: React.FC = () => {
           <div className="p-6 w-full flex justify-between border-b-2 border-gray-300">
             <div></div>
             <input type="text" {...register("title")} className="w-1/2 text-center" placeholder="제목을 입력해주세요" />
-            <button onClick={() => setValue("title", "")}>X</button>
+            <button onClick={onClose}>X</button>
           </div>
           <div className="p-3 flex justify-end border-b-2 border-gray-300">
             <div className="mr-auto">
-              {watch("location") ? <p>위치: {watch("location")}</p> : <p>위치 정보가 없습니다</p>}
+              {images.map((image, index) => (
+                <Image
+                  key={index}
+                  src={URL.createObjectURL(image)}
+                  alt={`미리보기 ${index + 1}`}
+                  width={450}
+                  height={450}
+                  className={"m-3"}
+                />
+              ))}
             </div>
             <Image src={vectoricon} alt="vector icon" className="m-1" />
             <Image
@@ -116,12 +127,14 @@ const PostPage: React.FC = () => {
           </div>
           <div className="p-3 flex justify-center items-center overflow-x-auto">
             <div className="flex flex-row items-center">
-              {watch("images").map((image, index) => (
+              {images.map((image, index) => (
                 <Image
                   key={index}
                   src={URL.createObjectURL(image)}
                   alt={`미리보기 ${index + 1}`}
-                  className={"w-[450px] h-[450px] m-3"}
+                  width={450}
+                  height={450}
+                  className={"m-3"}
                 />
               ))}
             </div>

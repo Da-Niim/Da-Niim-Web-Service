@@ -39,7 +39,7 @@ function FeedPage() {
   }
 
   return (
-    <div className="flex flex-col items-center w-screen h-screen absolute">
+    <div className="flex flex-col items-center w-3/4 h-screen absolute">
       <div className="flex mt-12 place-content-between w-1/6">
         <Tab active={activeTab === "feed"} onClick={() => handleTabClick("feed")} name="게시글" />
         <Tab active={activeTab === "travel"} onClick={() => handleTabClick("travel")} name="여행기" />
