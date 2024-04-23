@@ -3,11 +3,11 @@ import React from "react"
 import { useRouter } from "next/navigation"
 import PostPage from "@components/feed/PostPage"
 
-interface ModalProps {
+interface PostProps {
   onClose?: () => void
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose }) => {
+const Post: React.FC<PostProps> = ({ onClose }) => {
   const router = useRouter()
 
   const closeModal = () => {
@@ -30,4 +30,4 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
   )
 }
 
-export default Modal
+export default Post
