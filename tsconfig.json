@@ -8,7 +8,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -20,9 +20,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@*": ["./src/*"],
+      // "@*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
       "@assets/*": ["public/assets/*"]
     }
   },
