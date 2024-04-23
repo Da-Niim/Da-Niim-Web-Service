@@ -37,9 +37,7 @@ const SignForm: React.FC = () => {
       if (response.ok) {
         router.push("/login")
       }
-    } catch (error) {
-      console.error("Registration failed:", error)
-    }
+    } catch (error) {}
   }
 
   return (

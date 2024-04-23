@@ -44,6 +44,7 @@ const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
     }
   }
 
+  //TODO: useRef 사용
   const handleImagePostIconClick = () => {
     const fileInput = document.getElementById("imageInput") as HTMLInputElement
     if (fileInput) {
