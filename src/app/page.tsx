@@ -1,4 +1,4 @@
-import MainKoreaMapContainer from "@/components/main/organisms/MainKoreaMapContainer"
+import MainKoreaMapContainer from "@components/main/organisms/MainKoreaMapContainer"
 
 export default function MainPage() {
   return (

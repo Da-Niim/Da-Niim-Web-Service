@@ -20,9 +20,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@*": ["./src/*"],
+      // "@*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
       "@assets/*": ["public/assets/*"]
     }
   },
