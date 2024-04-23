@@ -41,7 +41,6 @@ const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
         },
       )
     } else {
-      console.error("이 브라우저는 위치 정보를 지원하지 않습니다.")
     }
   }
 
