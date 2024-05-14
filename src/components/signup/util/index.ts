@@ -1,3 +1,3 @@
 export { formatPhoneNumber } from "./formatPhoneNumber"
-export * from "./Pattern"
+export * from "./pattern"
 export * from "./genderType"

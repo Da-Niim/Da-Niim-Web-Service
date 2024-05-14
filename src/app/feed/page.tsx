@@ -1,9 +1,9 @@
 "use client"
 import { fetchData } from "@utils/api"
-import FeedList from "@components/feed/FeedList"
+import FeedList from "@components/feed/feedList"
 import SubTab from "@components/feed/feedSubTab"
 import Tab from "@components/feed/feedTopTab"
-import TravelList from "@components/feed/TravelList"
+import TravelList from "@components/feed/travelList"
 
 import { useEffect, useState } from "react"
 

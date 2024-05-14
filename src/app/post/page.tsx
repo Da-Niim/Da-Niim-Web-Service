@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { useRouter } from "next/navigation"
-import PostPage from "@components/feed/PostPage"
+import PostPage from "@components/feed/postPage"
 
 interface PostProps {
   onClose?: () => void
