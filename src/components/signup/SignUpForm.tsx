@@ -3,12 +3,12 @@ import React from "react"
 import Button from "@components/common/Button"
 import InputWithLabel from "./InputWithLabel"
 import GenderButton from "@components/common/GenderButton"
-import { UserValue, SignFormProps } from "@utils/interface/SignUpInterface"
+import { UserValue, SignFormProps } from "@utils/interface/signUpInterface"
 import { registerUser } from "@utils/api"
 import { useForm } from "react-hook-form"
 import { idPattern, passwordPattern, emailPattern, phoneNumberPattern, genderType } from "./util"
 import { useDateSelect } from "./hooks"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 const SignForm: React.FC = () => {
   const {
@@ -21,24 +21,32 @@ const SignForm: React.FC = () => {
     mode: "onSubmit",
     defaultValues: {},
   })
+
+  const router = useRouter()
   const { years, months, days } = useDateSelect()
   const handleGenderSelection = (selectedGender: genderType) => {
     setValue("gender", selectedGender)
   }
-  const router = useRouter()
   const onSubmitForm = async (data: SignFormProps) => {
     const DateSelect = `${watch("years")}` + "-" + `${watch("months")}` + "-" + `${watch("days")}`
     const formData = {
-      ...data,
+      userId: data.userId,
+      password: data.password,
+      username: data.username,
+      nickname: data.nickname,
+      gender: data.gender,
+      phoneNumber: data.phoneNumber,
+      email: data.email,
       birthDate: DateSelect,
     }
     try {
       const response = await registerUser(formData)
       if (response.ok) {
+        console.log("성공")
         router.push("/login")
       }
     } catch (error) {
-      console.error("Registration failed:", error)
+      console.log("에러", formData)
     }
   }
 

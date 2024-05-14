@@ -1,4 +1,4 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import Input from "@components/common/Input"
 
 interface InputProps {
@@ -11,7 +11,7 @@ interface InputProps {
   pattern?: RegExp
 }
 
-const InputWithLabel: React.FC<InputProps> = ({
+const InputWithLabel: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
   label,
   register,
   name,
@@ -23,7 +23,7 @@ const InputWithLabel: React.FC<InputProps> = ({
   return (
     <div className="w-full p-2 flex flex-col">
       <label>{label}</label>
-      <Input type={type} {...register(name, { pattern })} placeholder={placeholder} />
+      <Input type={type} {...register(name, { pattern })} placeholder={placeholder} name={name} />
       {error && <div className="justify-start w-full pl-2">{error}</div>}
     </div>
   )

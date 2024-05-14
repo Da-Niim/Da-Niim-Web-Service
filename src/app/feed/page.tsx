@@ -1,10 +1,9 @@
 "use client"
 import { fetchData } from "@utils/api"
-import FeedList from "@components/feed/FeedList"
-
-import SubTab from "@components/feed/SubTab"
-import Tab from "@components/feed/Tab"
-import TravelList from "@components/feed/TravelList"
+import FeedList from "@components/feed/feedList"
+import SubTab from "@components/feed/feedSubTab"
+import Tab from "@components/feed/feedTopTab"
+import TravelList from "@components/feed/travelList"
 
 import { useEffect, useState } from "react"
 
@@ -34,12 +33,11 @@ function FeedPage() {
       const fetchedData = await fetchData(subTabName)
     } catch (error) {
       //TODO : 에러처리 필요
-      console.error("Error fetching data:", error)
     }
   }
 
   return (
-    <div className="flex flex-col items-center w-screen h-screen absolute">
+    <div className="flex flex-col items-center w-3/4 h-screen absolute">
       <div className="flex mt-12 place-content-between w-1/6">
         <Tab active={activeTab === "feed"} onClick={() => handleTabClick("feed")} name="게시글" />
         <Tab active={activeTab === "travel"} onClick={() => handleTabClick("travel")} name="여행기" />
@@ -47,8 +45,6 @@ function FeedPage() {
       <SubTab activeSubTab={activeSubTab} handleSubTabClick={handleSubTabClick} tabNames={tabNames} />
       <div>
         {activeTab === "feed" && <FeedList initialData={[]} />}
-        {/* {activeTab === "travel" && <TravelList data={initialData} />} */}
-        {/* {activeTab === "feed" && <FeedList />} */}
         {activeTab === "travel" && <TravelList initialData={[]} />}
       </div>
     </div>

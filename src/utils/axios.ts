@@ -22,8 +22,11 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
+      console.log("401에러")
     } else if (error.response && error.response.status === 404) {
+      console.log("404에러")
     } else if (error.response && error.response.status === 500) {
+      console.log("500에러")
     } else {
     }
     return Promise.reject(error)

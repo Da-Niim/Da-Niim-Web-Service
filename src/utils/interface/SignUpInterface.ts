@@ -4,7 +4,7 @@ export interface SignFormProps {
   userId: string
   nickname: string
   password: string
-  rePassword: string
+  rePassword?: string
   email: string
   phoneNumber: string
   gender: "MALE" | "FEMALE"
