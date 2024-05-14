@@ -1,4 +1,4 @@
-import { FeedListProps } from "../../utils/interface/FeedListProps"
+import { FeedListProps } from "../../utils/interface/feedListProps"
 
 function TravelList({ initialData }: FeedListProps) {
   return (

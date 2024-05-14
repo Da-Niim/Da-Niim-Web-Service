@@ -14,5 +14,4 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ c
     />
   )
 }
-
 export default forwardRef(Input)
