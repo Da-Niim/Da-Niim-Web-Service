@@ -1,8 +1,8 @@
-import { axiosInstance } from "@utils/axios"
+import { axiosClientInstance } from "@utils/axios"
 
 export default async function fetchData(subTab: string) {
   try {
-    const response = await axiosInstance.get(`/feeds?subTab=${subTab}`, {
+    const response = await axiosClientInstance.get(`/feeds?subTab=${subTab}`, {
       headers: {
         "Content-Type": "application/json",
         // Authorization: `Bearer ${}`,

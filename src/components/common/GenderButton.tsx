@@ -9,6 +9,7 @@ interface GenderButtonProps {
 const GenderButton: React.FC<GenderButtonProps> = ({ gender, isSelected, onClick }) => {
   return (
     <button
+      type="button"
       className={`w-28 h-10 ${isSelected ? "bg-submit-bg-color text-black" : "bg-gray-300 text-gray-600"} focus:outline-none rounded-md mr-2`}
       onClick={onClick}
     >

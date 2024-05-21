@@ -1,4 +1,4 @@
-import { axiosInstance } from "@utils/axios"
+import { axiosClientInstance } from "@utils/axios"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import KakaoProvider from "next-auth/providers/kakao"
@@ -21,7 +21,7 @@ const handler = NextAuth({
           return null
         }
 
-        const { data } = await axiosInstance.post(
+        const { data } = await axiosClientInstance.post(
           "/auth/login",
           {},
           {
@@ -62,7 +62,7 @@ const handler = NextAuth({
   },
   pages: {
     signIn: "/login",
-    signOut: "",
+    signOut: "/",
   },
 })
 

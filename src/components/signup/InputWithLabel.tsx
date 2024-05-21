@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react"
-import Input from "@components/common/Input"
+import { ctm } from "@utils/styles"
 
 interface InputProps {
   label: string
@@ -23,7 +23,13 @@ const InputWithLabel: React.ForwardRefRenderFunction<HTMLInputElement, InputProp
   return (
     <div className="w-full p-2 flex flex-col">
       <label>{label}</label>
-      <Input type={type} {...register(name, { pattern })} placeholder={placeholder} name={name} />
+      <input
+        className={ctm(`p-4 border border-gray-500 rounded-lg font-normal w-full`)}
+        type={type}
+        {...register(name, { pattern })}
+        placeholder={placeholder}
+        name={name}
+      />
       {error && <div className="justify-start w-full pl-2">{error}</div>}
     </div>
   )
