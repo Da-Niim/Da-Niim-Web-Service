@@ -1,7 +1,6 @@
-import { FeedListProps } from "../../utils/interface/feedListProps"
+import { FeedListProps } from "../../utils/interface/FeedListProps"
 
 function FeedList({ initialData }: FeedListProps) {
-  // function FeedList() {
   return (
     <div className="flex flex-col justify-center items-center">
       {initialData.map((data) => (
