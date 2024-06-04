@@ -1,8 +1,8 @@
-import { FeedListProps } from "../../utils/interface/feedListProps"
+import { FeedListProps } from "../../utils/interface/FeedListProps"
 
 function TravelList({ initialData }: FeedListProps) {
   return (
-    <div className="flex flex-col justify-center items-center w-screen">
+    <div className="flex flex-col justify-center items-center w-screen ">
       {initialData.map((data) => (
         <div key={data.postId} className="flex flex-col items-start w-1/3">
           <div className="flex flex-row justify-start items-center flex-nowrap">

@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { useRouter } from "next/navigation"
-import PostPage from "@components/feed/postPage"
+import PostPage from "@components/feed/PostPage"
 
 const Post: React.FC = () => {
   const router = useRouter()

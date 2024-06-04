@@ -1,9 +1,9 @@
 "use client"
 import Button from "@components/common/Button"
-import InputWithLabel from "@components/signUp/InputWithLabel"
+import InputWithLabel from "@components/signup/InputWithLabel"
 import { signIn, signOut } from "next-auth/react"
 import { FieldValue, FieldValues, useForm } from "react-hook-form"
-import SocialSignInButton from "./socialSignInButton"
+import SocialSignInButton from "./SocialSignInButton"
 
 // TODO: 로그인 리프레쉬 토큰 로직 구현 ( 로그인 상태 유지 )
 const LoginForm: React.FC = () => {

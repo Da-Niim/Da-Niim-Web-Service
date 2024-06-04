@@ -1,4 +1,4 @@
-import SignForm from "@components/signUp/signUpForm"
+import SignForm from "@components/signup/SignUpForm"
 
 const SignUp: React.FC = () => {
   return (
