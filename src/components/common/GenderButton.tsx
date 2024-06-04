@@ -1,5 +1,5 @@
 import React from "react"
-import { genderType } from "@components/signUp/util"
+import { genderType } from "@components/signup/util"
 interface GenderButtonProps {
   gender: genderType
   isSelected: boolean

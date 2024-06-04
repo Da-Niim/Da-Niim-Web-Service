@@ -1,4 +1,4 @@
-import { genderType } from "@components/signUp/util"
+import { genderType } from "@components/signup/util"
 export interface SignFormProps {
   username: string
   userId: string

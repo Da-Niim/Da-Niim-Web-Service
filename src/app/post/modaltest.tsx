@@ -1,5 +1,5 @@
 import React from "react"
-import PostSelcetPage from "@components/feed/postSelectPage"
+import PostSelcetPage from "@components/feed/PostSelectPage"
 
 interface PostProps {
   onClose: () => void
