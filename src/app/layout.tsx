@@ -18,12 +18,12 @@ interface LayoutProps {
   modal?: React.ReactNode
 }
 
-export default function RootLayout({ children, modal }: LayoutProps) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
       <body className={inter.className}>
         <main>
-          <Providers modal={modal}>
+          <Providers>
             <div className="flex flex-col w-screen h-screen">
               <HeaderNavigationBar />
               <div className="flex flex-1">

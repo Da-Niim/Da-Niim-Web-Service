@@ -20,12 +20,13 @@
     ],
     "baseUrl": ".",
     "paths": {
-      // "@*": ["./src/*"],
+      "@*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
       "@assets/*": ["public/assets/*"]
-    }
+    },
+    "typeRoots": ["./src/types", "node_modules/@types"]
   },
   "include": ["next-env.d.ts", "custom.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { axiosInstance } from "@utils/axios"
+import { axiosClientInstance } from "@utils/axios"
 
 interface GetProfile {
   followerCount: number
@@ -15,7 +15,7 @@ export const useGetProfile = () => {
   const { data, isLoading } = useQuery<GetProfile>({
     queryKey: ["profile"],
     queryFn: async () => {
-      const { data } = await axiosInstance.get("/user/me/info/profile")
+      const { data } = await axiosClientInstance.get("/user/me/info/profile")
       return data
     },
   })

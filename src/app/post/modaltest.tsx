@@ -1,12 +1,12 @@
 import React from "react"
-import PostPage from "@components/feed/postPage"
+import PostSelcetPage from "@components/feed/postSelectPage"
 
 interface PostProps {
   onClose: () => void
 }
 
-const Post: React.FC<PostProps> = ({ onClose }) => {
-  return <PostPage onClose={onClose} />
+const PostModal: React.FC<PostProps> = ({ onClose }) => {
+  return <PostSelcetPage onClose={onClose} />
 }
 
-export default Post
+export default PostModal
