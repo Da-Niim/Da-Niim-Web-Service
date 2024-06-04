@@ -1,2 +1,2 @@
-export { default as registerUser } from "./signUpApi"
-export { default as fetchData } from "./feedListApi"
+export { default as registerUser } from "./signApi"
+export { default as fetchData } from "./feedApi"
