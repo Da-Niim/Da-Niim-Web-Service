@@ -10,7 +10,7 @@ const TabButton = ({ isSelected, ...props }: TabButtonProps) => {
     <button
       className={ctm(
         `pb-1.5 w-fit px-12 text-base font-normal border-b-gray-900 text-gray-600`,
-        isSelected && "font-bold text-gray-900 border-b",
+        isSelected ? "font-bold text-gray-900 border-b" : undefined,
       )}
       {...props}
     >

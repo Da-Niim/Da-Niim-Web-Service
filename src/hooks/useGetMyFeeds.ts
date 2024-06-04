@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { axiosInstance } from "@utils/axios"
+import { axiosClientInstance } from "@utils/axios"
 
 interface GetMyFeedsProps {
   page: number
@@ -18,7 +18,7 @@ export const useGetMyFeeds = () => {
   return useQuery<GetMyFeedsProps>({
     queryKey: ["my-feeds"],
     queryFn: async () => {
-      const { data } = await axiosInstance.get("/feeds/profile")
+      const { data } = await axiosClientInstance.get("/feeds/profile")
       return data
     },
   })

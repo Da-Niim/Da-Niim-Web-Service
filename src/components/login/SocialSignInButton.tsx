@@ -34,11 +34,11 @@ const SocialSignInButton: React.FC<SocialSignInButtonProps> = ({ provider, onCli
 
   return (
     <div
-      className="flex flex-col item-center justify-start w-full pb-4 h-16 rounded-xl"
+      className="flex flex-col item-center justify-start w-full pb-2 h-12 rounded-xl mb-2"
       style={{ backgroundColor: buttonColor, color: fontColor }}
       onClick={onClick}
     >
-      {buttonIcon && <img className="object-contain h-16 rounded-xl pb-2" src={buttonIcon.src} alt={buttonText} />}
+      {buttonIcon && <img className="object-contain h-12 rounded-xl" src={buttonIcon.src} alt={buttonText} />}
     </div>
   )
 }

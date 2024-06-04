@@ -18,7 +18,7 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         if (!credentials) {
-          return null
+          throw new Error("Invalid credentials")
         }
 
         const { data } = await axiosClientInstance.post(
@@ -62,7 +62,7 @@ const handler = NextAuth({
   },
   pages: {
     signIn: "/login",
-    signOut: "/",
+    signOut: "/login",
   },
 })
 

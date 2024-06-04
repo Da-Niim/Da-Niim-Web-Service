@@ -25,7 +25,11 @@ const LoginForm: React.FC = () => {
   const handleNaverSignIn = async () => {
     await signIn("naver", { redirect: true, callbackUrl: "/" })
   }
-
+  const handleSignOut = async () => {
+    try {
+      await signOut({ redirect: true, callbackUrl: "/" })
+    } catch (error) {}
+  }
   return (
     <form className="flex flex-col items-center justify-center h-full w-full" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col justify-center h-full pb-2">
@@ -48,12 +52,10 @@ const LoginForm: React.FC = () => {
         </div>
         <Button className="w-[100%] pb-2">로그인</Button>
       </div>
-      <div className="flex flex-col item-center justify-center w-80 pb-2">
-        <SocialSignInButton provider={"kakao"} onClick={handleKakaoSignIn} />
-        <SocialSignInButton provider={"naver"} onClick={handleNaverSignIn} />
-      </div>
+      <SocialSignInButton provider={"kakao"} onClick={handleKakaoSignIn} />
+      <SocialSignInButton provider={"naver"} onClick={handleNaverSignIn} />
       <div className="flex flex-col item-center justify-center w-80">
-        <Button className="w-full transform" onClick={() => signOut()}>
+        <Button type="button" className="w-full transform" onClick={handleSignOut}>
           SignOut
         </Button>
       </div>

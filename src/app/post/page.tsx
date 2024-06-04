@@ -3,16 +3,11 @@ import React from "react"
 import { useRouter } from "next/navigation"
 import PostPage from "@components/feed/postPage"
 
-interface PostProps {
-  onClose?: () => void
-}
-
-const Post: React.FC<PostProps> = ({ onClose }) => {
+const Post: React.FC = () => {
   const router = useRouter()
 
   const closeModal = () => {
     router.back()
-    onClose && onClose()
   }
 
   return (
@@ -21,10 +16,13 @@ const Post: React.FC<PostProps> = ({ onClose }) => {
       onClick={closeModal}
     >
       <div className="w-[600px] bg-white rounded-lg p-4" onClick={(e) => e.stopPropagation()}>
+        <div className="flex justify-between">
+          <div className="flex flex-row justify-center items-center"></div>
+          <button className="pointer" onClick={closeModal}>
+            X
+          </button>
+        </div>
         <PostPage onClose={closeModal} />
-        <button onClick={closeModal} className="mt-4 w-full bg-gray-200 py-2 rounded-md">
-          닫기
-        </button>
       </div>
     </div>
   )

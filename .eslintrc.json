@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "@typescript-eslint", "prettier", "plugin:tailwindcss/recommended"],
+  "plugins": ["react","@typescript-eslint", "prettier", "plugin:tailwindcss/recommended"],
 
   "extends": [
     "next/core-web-vitals",
@@ -24,7 +24,6 @@
 
     "import/extensions": "off",
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/no-unescaped-entities": "off"
   }
 }

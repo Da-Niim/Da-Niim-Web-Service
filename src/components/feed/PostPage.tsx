@@ -1,12 +1,15 @@
 "use client"
-import React from "react"
-import { axiosInstance } from "@utils/axios"
+import React, { useRef } from "react"
 import { useForm } from "react-hook-form"
 import Image from "next/image"
+import { axiosClientInstance } from "@utils/axios"
 import addressicon from "@assets/icons/address.png"
 import imgposticon from "@assets/icons/imgpost.png"
 import vectoricon from "@assets/icons/vector.png"
 import withicon from "@assets/icons/with.png"
+import InputWithLabel from "@components/signUp/InputWithLabel"
+import { Session } from "next-auth"
+import { useSession } from "next-auth/react"
 
 interface FormValues {
   title: string
@@ -17,13 +20,17 @@ interface FormValues {
   expenses: string
   numOfPeople: string
 }
+
 interface PostPageProps {
   onClose?: () => void
 }
+
 const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
   const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
     defaultValues: {},
   })
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   const handleImageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : []
     setValue("images", files)
@@ -42,30 +49,32 @@ const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
     }
   }
 
-  //TODO: useRef 사용
   const handleImagePostIconClick = () => {
-    const fileInput = document.getElementById("imageInput") as HTMLInputElement
-    if (fileInput) {
-      fileInput.click()
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
     }
+  }
+  const createFormData = (data: FormValues): FormData => {
+    const formData = new FormData()
+    formData.append("title", data.title)
+    formData.append("comment", data.comment)
+    formData.append("tag", data.tag)
+    if (data.location) {
+      formData.append("location", data.location)
+    }
+    formData.append("expenses", data.expenses)
+    formData.append("numOfPeople", data.numOfPeople)
+    data.images.forEach((file, index) => {
+      formData.append(`images[${index}]`, file)
+    })
+    return formData
   }
 
   const handlePostButtonClick = handleSubmit(async (data) => {
-    try {
-      const formData = new FormData()
-      formData.append("title", data.title)
-      formData.append("comment", data.comment)
-      formData.append("tag", data.tag)
-      if (data.location) {
-        formData.append("location", data.location)
-      }
-      formData.append("expenses", data.expenses)
-      formData.append("numOfPeople", data.numOfPeople)
-      data.images.forEach((file, index) => {
-        formData.append(`images[${index}]`, file)
-      })
+    const formData = createFormData(data)
 
-      await axiosInstance.post("/feeds", formData, {
+    try {
+      await axiosClientInstance.post("/feeds", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -81,22 +90,10 @@ const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
         <div className="w-[600px] min-h-full min-w-full flex flex-col">
           <div className="p-6 w-full flex justify-between border-b-2 border-gray-300">
             <div></div>
-            <input type="text" {...register("title")} className="w-1/2 text-center" placeholder="제목을 입력해주세요" />
+            <InputWithLabel label="" register={register} name="title" placeholder="제목을 입력해주세요" error="" />
             <button onClick={onClose}>X</button>
           </div>
           <div className="p-3 flex justify-end border-b-2 border-gray-300">
-            <div className="mr-auto">
-              {images.map((image, index) => (
-                <Image
-                  key={index}
-                  src={URL.createObjectURL(image)}
-                  alt={`미리보기 ${index + 1}`}
-                  width={450}
-                  height={450}
-                  className={"m-3"}
-                />
-              ))}
-            </div>
             <Image src={vectoricon} alt="vector icon" className="m-1" />
             <Image
               src={addressicon}
@@ -107,6 +104,7 @@ const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
             <input
               type="file"
               id="imageInput"
+              ref={fileInputRef}
               accept="image/*"
               style={{ display: "none" }}
               onChange={handleImageInputChange}
@@ -138,13 +136,13 @@ const PostPage: React.FC<PostPageProps> = ({ onClose }) => {
             <textarea {...register("comment")} className="w-full h-20" placeholder="내용을 입력해 주세요" />
           </div>
           <div className="p-3 border-t-2 border-gray-300">
-            <input {...register("tag")} className="w-full" placeholder="태그" />
+            <InputWithLabel label="" register={register} name="tag" placeholder="태그" error="" />
           </div>
           <div className="p-3 border-t-2 border-gray-300">
-            <input {...register("expenses")} className="w-full" placeholder="경비" />
+            <InputWithLabel label="" register={register} name="expenses" placeholder="경비" error="" />
           </div>
           <div className="p-3 border-t-2 border-gray-300">
-            <input {...register("numOfPeople")} className="w-full" placeholder="인원" />
+            <InputWithLabel label="" register={register} name="numOfPeople" placeholder="인원" error="" />
           </div>
           <div className="p-3">
             <button
