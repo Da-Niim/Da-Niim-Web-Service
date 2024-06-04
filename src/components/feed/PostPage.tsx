@@ -7,7 +7,7 @@ import addressicon from "@assets/icons/address.png"
 import imgposticon from "@assets/icons/imgpost.png"
 import vectoricon from "@assets/icons/vector.png"
 import withicon from "@assets/icons/with.png"
-import InputWithLabel from "@components/signup/InputWithLabel"
+import InputWithLabel from "@components/signup/InputLabel"
 import { Session } from "next-auth"
 import { useSession } from "next-auth/react"
 
