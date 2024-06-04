@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react"
-import Input from "@components/common/Input"
+import { Input } from "@components/common/Input"
+import React from "react"
 
 interface InputProps {
   label: string

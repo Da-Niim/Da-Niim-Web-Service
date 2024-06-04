@@ -1,11 +1,11 @@
-import React, { forwardRef } from "react"
 import { ctm } from "@utils/styles"
+import React from "react"
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string
 }
 
-const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ className, ...props }, ref) => {
+export const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ className, ...props }, ref) => {
   return (
     <input
       {...props}
@@ -14,4 +14,5 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ c
     />
   )
 }
-export default forwardRef(Input)
+
+Input.displayName = "Input"
