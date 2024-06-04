@@ -1,3 +1,3 @@
-export type { TextElementProps } from "./textElementProps"
-export type { FeedListProps, TravelListProps } from "./feedListProps"
-export type { SignFormProps, InputProps, BirthDateSelectorProps } from "./signUpInterface"
+export type { TextElementProps } from "./textElementsProps"
+export type { FeedListProps, TravelListProps } from "./feedProps"
+export type { SignFormProps, InputProps, BirthDateSelectorProps } from "./signInterface"
